@@ -5,6 +5,8 @@ import JsxDemo from './learn/JsxDemo'
 import ComponentsDemo from './learn/ComponentsDemo'
 import PropsDemo from './learn/PropsDemo'
 import StateDemo from './learn/StateDemo'
+import HooksDemo from './learn/HooksDemo'
+import FormDemo from './learn/FormDemo'
 
 // 本页本身就是一个综合示例: 列表渲染 + key + className 动态切换 + state 驱动视图
 const tabs = [
@@ -12,6 +14,8 @@ const tabs = [
   { id: 'components', label: '函数组件' },
   { id: 'props', label: 'Props' },
   { id: 'state', label: 'State' },
+  { id: 'hooks', label: '核心 Hooks' },
+  { id: 'form', label: '表单与事件' },
 ] as const
 
 type TabId = (typeof tabs)[number]['id']
@@ -43,6 +47,8 @@ function App() {
       {activeTab === 'components' && <ComponentsDemo />}
       {activeTab === 'props' && <PropsDemo />}
       {activeTab === 'state' && <StateDemo />}
+      {activeTab === 'hooks' && <HooksDemo />}
+      {activeTab === 'form' && <FormDemo />}
     </main>
   )
 }

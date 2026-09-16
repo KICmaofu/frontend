@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json.schemastore.org/jsconfig.json",
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "ESNext",
+    "lib": [
+      "ES2017",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/模板/**/*",
+    "**/shebeiguanli.vue",
+    "**/shujvguanli.vue",
+    "**/xiaoxizhongxin.vue",
+    "**/xitongguanli.vue"
+  ],
+  "vueCompilerOptions": {
+    "target": 3.3
+  }
+}
