@@ -7,6 +7,8 @@ import PropsDemo from './learn/PropsDemo'
 import StateDemo from './learn/StateDemo'
 import HooksDemo from './learn/HooksDemo'
 import FormDemo from './learn/FormDemo'
+import CommunicationDemo from './learn/CommunicationDemo'
+import ConditionalListDemo from './learn/ConditionalListDemo'
 
 // 本页本身就是一个综合示例: 列表渲染 + key + className 动态切换 + state 驱动视图
 const tabs = [
@@ -16,6 +18,8 @@ const tabs = [
   { id: 'state', label: 'State' },
   { id: 'hooks', label: '核心 Hooks' },
   { id: 'form', label: '表单与事件' },
+  { id: 'communication', label: '组件通信' },
+  { id: 'condition-list', label: '条件与列表渲染' },
 ] as const
 
 type TabId = (typeof tabs)[number]['id']
@@ -49,6 +53,8 @@ function App() {
       {activeTab === 'state' && <StateDemo />}
       {activeTab === 'hooks' && <HooksDemo />}
       {activeTab === 'form' && <FormDemo />}
+      {activeTab === 'communication' && <CommunicationDemo />}
+      {activeTab === 'condition-list' && <ConditionalListDemo />}
     </main>
   )
 }
