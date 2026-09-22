@@ -1,0 +1,592 @@
+/* ============================================================
+   毕节职业技术学院 · day2 多页面练习站点统一样式
+   设计基调：学院蓝 + 金色点缀，浅灰背景 + 白色卡片
+   ============================================================ */
+
+/* ---------- 基础重置与变量 ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #0f4c81;        /* 主色：学院蓝 */
+    --primary-dark: #0a3660;   /* 深蓝：顶栏 / 页脚 */
+    --primary-light: #eaf2fa;  /* 浅蓝：悬停底色 */
+    --accent: #c9a227;         /* 点缀色：金 */
+    --text: #333;
+    --text-light: #667085;
+    --border: #e3e8ef;
+    --bg: #f4f6f9;
+    --radius: 10px;
+    --shadow: 0 2px 10px rgba(15, 76, 129, 0.08);
+}
+
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.65;
+}
+
+img { max-width: 100%; }
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.25s;
+}
+
+a:hover { color: var(--accent); }
+
+a:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+em { font-style: normal; }
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 18px 0;
+}
+
+/* ---------- 顶部信息条 ---------- */
+.topbar {
+    background: var(--primary-dark);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 7px max(18px, calc((100% - 1200px) / 2));
+}
+
+.topbar ul {
+    list-style: none;
+    display: flex;
+    gap: 22px;
+}
+
+.topbar a { color: rgba(255, 255, 255, 0.85); }
+.topbar a:hover { color: var(--accent); }
+
+/* ---------- 品牌区（校徽 + 校名 + 搜索） ---------- */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: #fff;
+    padding: 18px max(18px, calc((100% - 1200px) / 2));
+    border-bottom: 1px solid var(--border);
+}
+
+.brand-logo a { display: block; }
+.brand-logo img { display: block; height: 62px; width: auto; }
+
+.brand-text { flex: 1; min-width: 0; }
+
+.school-name {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--primary);
+}
+
+.motto {
+    margin-top: 4px;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: var(--text-light);
+}
+
+.search input {
+    width: 230px;
+    padding: 9px 18px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #8a93a0;
+    background: #fff;
+    border: 2px solid var(--primary);
+    border-radius: 999px;
+    outline: none;
+}
+
+.search input:hover { box-shadow: 0 0 0 4px var(--primary-light); }
+
+/* ---------- 主导航 ---------- */
+.main-nav {
+    background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.main-nav a {
+    display: block;
+    padding: 14px 32px;
+    color: #fff;
+    font-size: 16px;
+    transition: background 0.25s;
+}
+
+.main-nav a:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+}
+
+.main-nav a.active {
+    background: rgba(0, 0, 0, 0.22);
+    color: #fff;
+    box-shadow: inset 0 -3px 0 var(--accent);
+}
+
+/* ---------- 横幅大图 ---------- */
+.banner img {
+    display: block;
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+}
+
+/* ---------- 主体布局 ---------- */
+main {
+    max-width: 1200px;
+    margin: 26px auto 46px;
+    padding: 0 18px;
+}
+
+/* 带侧边栏的页面（news.html / NewsDetails.html）双栏布局 */
+main.with-aside {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 20px;
+    align-items: start;
+    grid-auto-flow: dense;
+}
+
+main.with-aside > nav,
+main.with-aside > section { grid-column: 1 / -1; }
+
+main.with-aside > article { grid-column: 1; }
+main.with-aside > aside { grid-column: 2; }
+
+/* ---------- 页面大标题 / 卡片区块 ---------- */
+main > h1 {
+    font-size: 26px;
+    color: var(--primary);
+    background: #fff;
+    border-left: 6px solid var(--accent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 18px 26px;
+    margin-bottom: 20px;
+}
+
+main section,
+article {
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+}
+
+main section h2,
+article h2 {
+    font-size: 20px;
+    line-height: 1.4;
+    color: var(--primary);
+    border-left: 4px solid var(--primary);
+    padding-left: 12px;
+    margin-bottom: 14px;
+}
+
+main p { color: #444; margin-bottom: 10px; }
+main section p:last-child,
+article p:last-child { margin-bottom: 0; }
+
+/* ---------- 面包屑导航 ---------- */
+.breadcrumb {
+    font-size: 13px;
+    color: #98a2b3;
+    padding-bottom: 14px;
+}
+
+.breadcrumb ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.breadcrumb li { display: flex; align-items: center; gap: 8px; }
+.breadcrumb li + li::before { content: "›"; color: #c0c7d1; }
+.breadcrumb a { color: #667085; }
+.breadcrumb a:hover { color: var(--primary); }
+
+/* ---------- 上一篇 / 下一篇 与 返回导航 ---------- */
+.prev-next,
+.back-links {
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px 24px;
+    margin-bottom: 20px;
+}
+
+.prev-next ol { list-style: none; }
+.prev-next li { padding: 6px 0; font-size: 15px; color: var(--text-light); }
+.prev-next li + li { border-top: 1px dashed var(--border); }
+
+.back-links ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.back-links a {
+    display: inline-block;
+    padding: 8px 24px;
+    border: 1px solid var(--primary);
+    border-radius: 999px;
+    font-size: 14px;
+    transition: all 0.25s;
+}
+
+.back-links a:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+/* ---------- 图片卡片网格 ---------- */
+.photo-grid ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.photo-grid figure {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.photo-grid img {
+    display: block;
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    transition: transform 0.45s;
+}
+
+.photo-grid figure:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(15, 76, 129, 0.16);
+}
+
+.photo-grid figure:hover img { transform: scale(1.05); }
+
+.photo-grid figcaption {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-light);
+    padding: 10px 8px;
+}
+
+/* ---------- 快捷导航（首页图标入口） ---------- */
+.quick-nav ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+}
+
+.quick-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 8px;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.25s;
+}
+
+.quick-nav a:hover {
+    background: var(--primary-light);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(15, 76, 129, 0.12);
+}
+
+.quick-nav img {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+}
+
+/* ---------- 友情链接（胶囊按钮） ---------- */
+.friend-links ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.friend-links a {
+    display: inline-block;
+    padding: 7px 20px;
+    background: var(--primary-light);
+    border-radius: 999px;
+    font-size: 14px;
+    transition: all 0.25s;
+}
+
+.friend-links a:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+.friend-links p { font-size: 13px; color: #98a2b3; }
+
+/* ---------- 新闻正文 ---------- */
+article h1 {
+    font-size: 26px;
+    line-height: 1.5;
+    color: #1f2d3d;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+article p {
+    font-size: 16px;
+    line-height: 1.9;
+    text-indent: 2em;
+    margin-bottom: 14px;
+}
+
+.article-meta {
+    text-indent: 0;
+    text-align: center;
+    font-size: 14px;
+    color: #8a93a0;
+}
+
+article figure {
+    text-align: center;
+    margin: 20px 0;
+}
+
+article figure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+article figcaption {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #98a2b3;
+}
+
+/* ---------- 侧边栏 ---------- */
+aside section {
+    padding: 18px 20px;
+    margin-bottom: 16px;
+}
+
+aside section:last-child { margin-bottom: 0; }
+
+aside section h2 { font-size: 17px; }
+
+/* 侧边文字列表 */
+.side-list ul { list-style: none; }
+
+.side-list li { border-bottom: 1px dashed var(--border); }
+.side-list li:last-child { border-bottom: 0; }
+
+.side-list a {
+    display: block;
+    position: relative;
+    padding: 9px 0 9px 16px;
+    font-size: 14px;
+    color: #475467;
+    transition: color 0.25s;
+}
+
+.side-list a::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 18px;
+    width: 6px;
+    height: 6px;
+    border-radius: 2px;
+    background: var(--accent);
+}
+
+.side-list a:hover { color: var(--primary); }
+
+/* 侧边图文资讯 */
+.side-news ul { list-style: none; }
+
+.side-news li {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border);
+}
+
+.side-news li:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.side-news img {
+    width: 92px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.side-news a {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #475467;
+}
+
+.side-news a:hover { color: var(--primary); }
+
+/* ---------- 表格 ---------- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 6px;
+    font-size: 15px;
+}
+
+caption {
+    caption-side: top;
+    text-align: left;
+    padding: 0 0 10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+th,
+td {
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+}
+
+thead th {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+tbody tr:nth-child(even) { background: #f7fafd; }
+tbody tr:hover { background: var(--primary-light); }
+
+tbody th {
+    background: #eef4fb;
+    color: var(--primary-dark);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* ---------- 页脚 ---------- */
+footer {
+    background: var(--primary-dark);
+    color: rgba(255, 255, 255, 0.72);
+}
+
+footer nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 28px;
+    padding: 20px 16px 6px;
+}
+
+footer nav a { font-size: 14px; color: rgba(255, 255, 255, 0.82); }
+footer nav a:hover { color: var(--accent); }
+
+footer > p {
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.55);
+    padding: 14px 16px 20px;
+}
+
+/* ---------- 响应式适配 ---------- */
+@media (max-width: 900px) {
+    main.with-aside { grid-template-columns: 1fr; }
+    main.with-aside > aside { grid-column: 1; }
+}
+
+@media (max-width: 768px) {
+    .topbar {
+        flex-direction: column;
+        gap: 2px;
+        text-align: center;
+        padding: 8px 12px;
+    }
+
+    .topbar ul { gap: 14px; }
+
+    .brand {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        padding: 16px 18px;
+    }
+
+    .brand-logo img { height: 54px; margin: 0 auto; }
+    .school-name { font-size: 22px; }
+    .motto { letter-spacing: 1px; }
+    .search input { width: min(320px, 90vw); }
+
+    .main-nav a { padding: 10px 14px; font-size: 14px; }
+    .banner img { height: 170px; }
+
+    main { margin: 16px auto 30px; padding: 0 12px; }
+    main > h1 { font-size: 21px; padding: 14px 18px; }
+    main section, article { padding: 18px 16px; }
+
+    .photo-grid ul { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+    .photo-grid img { height: 130px; }
+
+    table { font-size: 13px; }
+    th, td { padding: 7px 9px; }
+}

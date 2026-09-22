@@ -25,13 +25,8 @@ export function Layout({ children }: { children: ReactNode }) {
               <Cpu size={16} className="text-blueprint-500" />
               <span className="absolute -right-0.5 -top-0.5 h-1.5 w-1.5 bg-amber rounded-full animate-pulse" />
             </span>
-            <div className="leading-none">
-              <div className="font-mono text-sm font-bold tracking-wider text-blueprint-50">
-                BLUEPRINT<span className="text-blueprint-500">·QUIZ</span>
-              </div>
-              <div className="text-[9px] uppercase tracking-[0.2em] text-blueprint-300">
-                工业机器人备赛
-              </div>
+            <div className="font-mono text-sm font-bold tracking-wider text-blueprint-50">
+              刷题<span className="text-blueprint-500">软件</span>
             </div>
           </NavLink>
 

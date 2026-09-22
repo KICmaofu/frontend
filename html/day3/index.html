@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页 | 个人介绍</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", "Microsoft YaHei", sans-serif; }
+        body { background: #0f172a; color: #e2e8f0; min-height: 100vh; display: flex; flex-direction: column; }
+        nav { background: #1e293b; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 1.25rem; font-weight: 700; color: #38bdf8; }
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a { color: #cbd5e1; text-decoration: none; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: #38bdf8; }
+        .hero { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem; gap: 1.5rem; }
+        .avatar { width: 160px; height: 160px; border-radius: 50%; background: linear-gradient(135deg, #38bdf8, #818cf8); display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: bold; color: white; margin-bottom: 1rem; }
+        .hero h1 { font-size: 2.5rem; background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.125rem; color: #94a3b8; max-width: 600px; line-height: 1.8; }
+        .tags { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 1rem; }
+        .tag { padding: 0.5rem 1rem; background: #1e293b; border: 1px solid #334155; border-radius: 999px; font-size: 0.875rem; color: #38bdf8; }
+        .btn-group { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+        .btn { padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none; font-weight: 500; transition: all 0.3s; }
+        .btn-primary { background: #38bdf8; color: #0f172a; }
+        .btn-primary:hover { background: #0ea5e9; transform: translateY(-2px); }
+        .btn-outline { border: 1px solid #38bdf8; color: #38bdf8; }
+        .btn-outline:hover { background: rgba(56, 189, 248, 0.1); }
+        .showcase { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 2rem 4rem; }
+        .showcase-title { font-size: 1.5rem; color: #f1f5f9; border-left: 4px solid #38bdf8; padding-left: 1rem; margin-bottom: 1.5rem; }
+        .showcase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .shot { background: #1e293b; border: 1px solid #334155; border-radius: 12px; overflow: hidden; transition: all 0.3s; }
+        .shot:hover { border-color: #38bdf8; transform: translateY(-4px); }
+        .shot img { display: block; width: 100%; height: 200px; object-fit: contain; background: #0b1220; }
+        .shot figcaption { padding: 0.875rem 1rem; font-size: 0.875rem; color: #94a3b8; }
+        footer { text-align: center; padding: 1.5rem; color: #64748b; font-size: 0.875rem; border-top: 1px solid #1e293b; }
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 1.75rem; }
+            .nav-links { gap: 1rem; font-size: 0.875rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">My Profile</div>
+        <div class="nav-links">
+            <a href="index.html" class="active">首页</a>
+            <a href="about.html">关于我</a>
+            <a href="skills.html">技能项目</a>
+            <a href="roadmap.html">成长路径</a>
+            <a href="contact.html">联系我</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="avatar">AI</div>
+        <h1>未来大模型应用架构师</h1>
+        <p>专注于 AI 大模型落地与全栈开发，探索从底层硬件到上层应用的完整技术链路，致力于打造有价值的智能系统。</p>
+        <div class="tags">
+            <span class="tag">大模型应用</span>
+            <span class="tag">PyTorch</span>
+            <span class="tag">全栈开发</span>
+            <span class="tag">STM32 嵌入式</span>
+            <span class="tag">持续学习</span>
+        </div>
+        <div class="btn-group">
+            <a href="about.html" class="btn btn-primary">了解更多</a>
+            <a href="contact.html" class="btn btn-outline">联系我</a>
+        </div>
+    </section>
+
+    <section class="showcase">
+        <h2 class="showcase-title">荣誉时刻</h2>
+        <div class="showcase-grid">
+            <figure class="shot">
+                <img src="./img/award-lanqiao-provincial.jpg" alt="第十七届蓝桥杯全国大学生软件和信息技术大赛省赛贵州赛区获奖名单，Python 程序设计大学 C 组一等奖" title="蓝桥杯省赛一等奖">
+                <figcaption>第十七届蓝桥杯省赛 · Python 大学 C 组一等奖</figcaption>
+            </figure>
+            <figure class="shot">
+                <img src="./img/award-lanqiao-national.jpg" alt="第十七届蓝桥杯全国总决赛 Python 程序设计大学 C 组获奖名单，一等奖" title="蓝桥杯全国总决赛一等奖">
+                <figcaption>第十七届蓝桥杯全国总决赛 · 一等奖</figcaption>
+            </figure>
+            <figure class="shot">
+                <img src="./img/cert-skills-ai-2026.jpg" alt="2026 年贵州省职业院校技能大赛暨世界职业院校技能大赛贵州省选拔赛人工智能赛道高职组二等奖获奖证书" title="技能大赛二等奖证书">
+                <figcaption>2026 年贵州省职业院校技能大赛 · 人工智能赛道二等奖</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 个人介绍网站 | 用代码构建未来
+    </footer>
+</body>
+</html>

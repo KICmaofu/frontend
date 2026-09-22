@@ -17,7 +17,8 @@
   margin-bottom: 24px;
 }
 
-.learn-tabs {
+/* 导航栏(Layout 布局): <NavLink> 渲染成 <a>, 激活项由组件自动加 .active 类 */
+.learn-nav {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -25,26 +26,24 @@
   border-bottom: 1px solid var(--border);
 }
 
-.learn-tab {
-  font: inherit;
+.learn-nav-link {
   font-size: 15px;
   padding: 6px 14px;
   border-radius: 6px;
   border: 1px solid var(--border);
-  background: transparent;
   color: var(--text);
-  cursor: pointer;
+  text-decoration: none;
   transition:
     color 0.2s,
     border-color 0.2s,
     background 0.2s;
 }
 
-.learn-tab:hover {
+.learn-nav-link:hover {
   border-color: var(--accent-border);
 }
 
-.learn-tab.active {
+.learn-nav-link.active {
   color: var(--accent);
   background: var(--accent-bg);
   border-color: var(--accent-border);
@@ -213,6 +212,12 @@
   font-size: 14px;
 }
 
+/* 网络请求示例: 拦截器日志使用等宽小字号 */
+.learn-log-text {
+  font-family: var(--mono);
+  font-size: 13.5px;
+}
+
 /* 事件冒泡演示区域: 虚线框代表一个绑定了 onClick 的容器 */
 .learn-hotarea {
   display: flex;
@@ -221,6 +226,34 @@
   padding: 12px;
   border: 1px dashed var(--accent-border);
   border-radius: 8px;
+}
+
+/* Zustand 示例: 模拟的站内顶栏, 用于演示全局用户状态的跨组件共享 */
+.learn-mock-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--social-bg);
+  font-size: 15px;
+}
+
+/* 顶栏里的用户头像: 取用户名的首字显示 */
+.learn-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
 }
 
 @media (max-width: 1024px) {

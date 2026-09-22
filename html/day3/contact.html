@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我 | 个人介绍</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", "Microsoft YaHei", sans-serif; }
+        body { background: #0f172a; color: #e2e8f0; line-height: 1.7; }
+        nav { background: #1e293b; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 1.25rem; font-weight: 700; color: #38bdf8; }
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a { color: #cbd5e1; text-decoration: none; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: #38bdf8; }
+        .container { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-title { font-size: 2rem; margin-bottom: 2rem; color: #f1f5f9; border-left: 4px solid #38bdf8; padding-left: 1rem; }
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+        .info-card { background: #1e293b; padding: 1.5rem; border-radius: 10px; border: 1px solid #334155; }
+        .info-card h4 { color: #38bdf8; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .info-card p { color: #cbd5e1; }
+        .form-card { background: #1e293b; padding: 2rem; border-radius: 10px; border: 1px solid #334155; }
+        .form-card h3 { color: #818cf8; margin-bottom: 1.5rem; }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; color: #94a3b8; font-size: 0.9rem; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 0.75rem 1rem; background: #0f172a;
+            border: 1px solid #334155; border-radius: 8px; color: #e2e8f0;
+            font-size: 0.95rem; outline: none; transition: border-color 0.3s;
+        }
+        .form-group input:focus, .form-group textarea:focus { border-color: #38bdf8; }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .submit-btn {
+            width: 100%; padding: 0.875rem; background: #38bdf8; color: #0f172a;
+            border: none; border-radius: 8px; font-size: 1rem; font-weight: 600;
+            cursor: pointer; transition: background 0.3s;
+        }
+        .submit-btn:hover { background: #0ea5e9; }
+        footer { text-align: center; padding: 1.5rem; color: #64748b; font-size: 0.875rem; border-top: 1px solid #1e293b; margin-top: 2rem; }
+        @media (max-width: 768px) {
+            .contact-wrapper { grid-template-columns: 1fr; }
+            .nav-links { gap: 1rem; font-size: 0.875rem; }
+            .section-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">My Profile</div>
+        <div class="nav-links">
+            <a href="index.html">首页</a>
+            <a href="about.html">关于我</a>
+            <a href="skills.html">技能项目</a>
+            <a href="roadmap.html">成长路径</a>
+            <a href="contact.html" class="active">联系我</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="section-title">联系我</h2>
+
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <div class="info-card">
+                    <h4>📧 电子邮箱</h4>
+                    <p>1705661417@qq.com</p>
+                </div>
+                <div class="info-card">
+                    <h4>💬 技术交流</h4>
+                    <p>欢迎讨论大模型应用、全栈开发、嵌入式技术相关话题</p>
+                </div>
+                <div class="info-card">
+                    <h4>🤝 合作方向</h4>
+                    <p>大模型落地项目、技术方案咨询、开源项目协作</p>
+                </div>
+                <div class="info-card">
+                    <h4>📍 所在地区</h4>
+                    <p>中国 · 贵州</p>
+                </div>
+            </div>
+
+            <div class="form-card">
+                <h3>给我留言</h3>
+                <form onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">你的称呼</label>
+                        <input type="text" id="name" placeholder="请输入你的名字" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">联系邮箱</label>
+                        <input type="email" id="email" placeholder="请输入你的邮箱" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">留言内容</label>
+                        <textarea id="message" placeholder="写下你想说的话..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">发送留言</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 个人介绍网站 | 用代码构建未来
+    </footer>
+
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert("留言已发送！我会尽快回复你。");
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>

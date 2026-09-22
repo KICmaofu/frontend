@@ -21,9 +21,7 @@ export default function Dashboard() {
             <span className="bp-eyebrow text-blueprint-500">SYSTEM ONLINE · 系统就绪</span>
           </div>
           <h1 className="font-mono text-3xl md:text-4xl font-bold text-blueprint-50 leading-tight">
-            工业机器人备赛
-            <span className="text-blueprint-500">·</span>
-            蓝图刷题台
+            刷题软件
           </h1>
           <p className="mt-3 max-w-2xl text-blueprint-200 text-sm md:text-base leading-relaxed">
             导入你自己的 JSON / CSV / TXT 题库文件，按文件结构自动分类，顺序或随机刷题，全程本地存储。

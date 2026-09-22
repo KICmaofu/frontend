@@ -14,7 +14,7 @@ export class AppDB extends Dexie {
   bookmarks!: Table<Bookmark, string>;
 
   constructor() {
-    super("blueprint-quiz-db");
+    super("shuati-software-db");
     this.version(1).stores({
       files: "id, name, category, importedAt",
       questions: "id, fileId, order, [fileId+order]",
