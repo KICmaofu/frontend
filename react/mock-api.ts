@@ -10,7 +10,7 @@ import type { Plugin } from 'vite'
 //
 // 所有响应统一为 { code, message, data } 结构: code 为 0 表示业务成功,
 // 与 src/api/request.ts 里约定的 ApiResponse 类型保持一致;
-// 上线时把 baseURL 换成真实后端地址, 本文件不需要打包进生产环境
+// 本文件只在 VITE_USE_MOCK=true 时被 vite.config.ts 加载, 不进入生产构建
 
 interface TodoItem {
   id: number

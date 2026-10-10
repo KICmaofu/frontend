@@ -1,0 +1,587 @@
+/* ============================================================
+   哪吒闹海 · day5 练习 — 外部样式表（nezha.css）
+   设计基调：中国红 + 鎏金点缀，宣纸米色底 + 米白卡片
+   说明：页面通过 HTML 中的 <link rel="stylesheet" href="nezha.css">
+         引用本文件，实现“结构”与“表现”分离。
+   ============================================================ */
+
+/* ---------- 基础重置与变量 ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --red: #b5271d;          /* 主色：中国红 */
+    --red-deep: #7d150e;     /* 深红：导航栏 / 印章 */
+    --gold: #d9a441;         /* 点缀色：鎏金 */
+    --gold-light: #f2d38b;   /* 浅金：深色背景上的文字 */
+    --sea: #126e7f;          /* 东海青：法宝区点缀 */
+    --sea-deep: #0b4a57;     /* 深海青 */
+    --paper: #faf4e8;        /* 宣纸底色 */
+    --card: #fffdf7;         /* 卡片底色 */
+    --ink: #3a322a;          /* 墨色正文 */
+    --ink-light: #7d7265;    /* 浅墨色辅助文字 */
+    --border: #ecdfc8;       /* 描边色 */
+    --radius: 14px;
+    --shadow: 0 6px 18px rgba(125, 21, 14, 0.08);
+    --font-kai: "KaiTi", "STKaiti", "楷体", "SimSun", serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image: radial-gradient(rgba(217, 164, 65, 0.14) 1px, transparent 1.5px);
+    background-size: 26px 26px;
+}
+
+img { display: block; max-width: 100%; }
+
+a {
+    color: var(--red);
+    text-decoration: none;
+    transition: color 0.25s;
+}
+
+a:hover { color: var(--red-deep); }
+
+::selection {
+    background: var(--red);
+    color: #fff;
+}
+
+/* 标题统一使用楷体（并集选择器） */
+h1, h2, h3 {
+    font-family: var(--font-kai);
+    font-weight: 700;
+}
+
+/* ---------- 顶部导航 ---------- */
+.site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 0 max(16px, calc((100% - 1100px) / 2));
+    background: linear-gradient(90deg, var(--red-deep), var(--red) 50%, var(--red-deep));
+    box-shadow: 0 3px 10px rgba(63, 15, 11, 0.35);
+}
+
+p.nav-brand {
+    padding: 10px 0;
+    font-family: var(--font-kai);
+    font-size: 24px;
+    letter-spacing: 8px;
+    color: var(--gold-light);
+}
+
+.site-nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* 交集选择器：只作用于同时具备 a 标签与 nav-link 类的元素 */
+a.nav-link {
+    display: block;
+    padding: 17px 18px;
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+a.nav-link:hover {
+    color: var(--gold-light);
+    background: rgba(0, 0, 0, 0.18);
+    box-shadow: inset 0 -3px 0 var(--gold-light);
+}
+
+/* ---------- 主题横幅 ---------- */
+.hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    text-align: center;
+    padding: 88px 20px 112px;
+    color: #fff;
+    background-color: var(--red-deep);
+    background-image:
+        linear-gradient(rgba(80, 12, 8, 0.72), rgba(80, 12, 8, 0.45) 45%, rgba(80, 12, 8, 0.8)),
+        url("img/nezha-flame.jpg");
+    background-size: cover;
+    background-position: center 28%;
+    background-repeat: no-repeat;
+}
+
+/* 祥云点纹装饰 */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.12) 2px, transparent 2.5px);
+    background-size: 38px 38px;
+}
+
+/* 底部浪花边（用径向渐变圆点拼出海浪） */
+.hero::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 30px;
+    z-index: -1;
+    background-image: radial-gradient(circle at 50% 100%, var(--paper) 18px, transparent 19px);
+    background-size: 60px 30px;
+    background-repeat: repeat-x;
+}
+
+p.hero-eyebrow {
+    font-size: 15px;
+    letter-spacing: 6px;
+    color: var(--gold-light);
+}
+
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+    content: "◆";
+    margin: 0 14px;
+    font-size: 10px;
+    vertical-align: 2px;
+    color: var(--gold);
+}
+
+.hero h1 {
+    margin: 14px 0 10px;
+    font-size: clamp(46px, 8vw, 76px);
+    letter-spacing: 16px;
+    text-indent: 16px;
+    text-shadow: 0 5px 20px rgba(0, 0, 0, 0.35), 0 0 36px rgba(242, 211, 139, 0.4);
+}
+
+p.hero-sub {
+    font-family: var(--font-kai);
+    font-size: 19px;
+    letter-spacing: 5px;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+/* ---------- 主体布局与内容卡片 ---------- */
+main {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: -46px auto 0;
+    padding: 0 20px 64px;
+}
+
+section {
+    scroll-margin-top: 84px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 34px 38px 36px;
+    margin-bottom: 26px;
+}
+
+/* 区块标题：居中楷体 + 金色菱形点缀 */
+section h2 {
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 8px;
+    color: var(--red);
+    margin-bottom: 26px;
+}
+
+section h2::before,
+section h2::after {
+    content: "◆";
+    margin: 0 18px;
+    font-size: 12px;
+    letter-spacing: 0;
+    vertical-align: 5px;
+    color: var(--gold);
+}
+
+/* 段落首行缩进（id 选择器） */
+#intro p,
+#culture p {
+    text-indent: 2em;
+    color: #4a4238;
+}
+
+#intro p + p { margin-top: 10px; }
+
+/* ---------- 页面配图 ---------- */
+.intro-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 26px;
+    align-items: center;
+}
+
+figure.scene {
+    margin: 26px 0;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 24px rgba(125, 21, 14, 0.12);
+}
+
+.intro-layout figure.scene { margin: 0; }
+
+figure.scene img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    object-position: center 30%;
+}
+
+figure.scene figcaption {
+    padding: 10px 12px;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: var(--ink-light);
+    background: #fffdf7;
+}
+
+/* ---------- 图集欣赏 ---------- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+}
+
+.gallery-grid figure {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.gallery-grid figure:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    box-shadow: 0 12px 26px rgba(125, 21, 14, 0.15);
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    object-position: center 32%;
+}
+
+.gallery-grid figcaption {
+    padding: 9px 12px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-light);
+    background: #fffdf7;
+}
+
+/* ---------- 经典情节：时间线 ---------- */
+.timeline {
+    position: relative;
+    list-style: none;
+    counter-reset: step;
+    margin-top: 6px;
+}
+
+/* 贯穿时间线的虚线 */
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 23px;
+    top: 14px;
+    bottom: 14px;
+    border-left: 2px dashed #e6d3ac;
+}
+
+.timeline li {
+    position: relative;
+    padding: 0 0 28px 78px;
+}
+
+.timeline li:last-child { padding-bottom: 0; }
+
+/* 圆形序号（CSS 计数器实现） */
+.timeline li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 48px;
+    font-family: var(--font-kai);
+    font-size: 22px;
+    color: var(--gold-light);
+    background: radial-gradient(circle at 32% 26%, #cf4632, var(--red) 58%, var(--red-deep));
+    box-shadow: 0 0 0 5px var(--card), 0 4px 10px rgba(125, 21, 14, 0.25);
+}
+
+.timeline h3 {
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: var(--red-deep);
+    margin-bottom: 4px;
+}
+
+.timeline p {
+    font-size: 15px;
+    color: #5a5146;
+}
+
+/* ---------- 人物介绍卡片 ---------- */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    text-align: center;
+    padding: 26px 22px;
+    background: linear-gradient(180deg, #fffef9, #fdf6e6);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+    box-shadow: 0 14px 30px rgba(125, 21, 14, 0.14);
+}
+
+/* 圆形“印章”头像（交集选择器） */
+p.avatar {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 64px;
+    font-family: var(--font-kai);
+    font-size: 30px;
+    color: var(--gold-light);
+    background: radial-gradient(circle at 32% 26%, #cf4632, var(--red) 58%, var(--red-deep));
+    box-shadow: 0 0 0 4px #fdf3df, 0 6px 14px rgba(125, 21, 14, 0.2);
+}
+
+.card h3 {
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: var(--red-deep);
+    margin-bottom: 8px;
+}
+
+/* 身份标签小藥丸 */
+p.role {
+    display: inline-block;
+    padding: 3px 14px;
+    margin-bottom: 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #8a6d2f;
+    background: #f7ecd2;
+}
+
+/* 卡片描述文字：最后一个段落左对齐（伪类选择器） */
+.card p:last-child {
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #5a5146;
+}
+
+/* ---------- 法宝一览 ---------- */
+.item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.item {
+    text-align: center;
+    padding: 28px 20px 24px;
+    background: linear-gradient(180deg, #fffef9, #f7f1e3);
+    border: 1px dashed #e3cf9f;
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.item:hover {
+    transform: translateY(-4px);
+    border-style: solid;
+    border-color: var(--gold);
+    box-shadow: 0 12px 24px rgba(11, 74, 87, 0.12);
+}
+
+/* 青色圆形法宝图标（交集选择器） */
+p.badge {
+    width: 74px;
+    height: 74px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 74px;
+    font-family: var(--font-kai);
+    font-size: 32px;
+    color: #fff;
+    background: radial-gradient(circle at 32% 26%, #1b8ba3, var(--sea) 55%, var(--sea-deep));
+    box-shadow: inset 0 0 0 3px rgba(242, 211, 139, 0.6), 0 8px 16px rgba(11, 74, 87, 0.25);
+    transition: transform 0.35s;
+}
+
+.item:hover p.badge { transform: rotate(-8deg) scale(1.06); }
+
+.item h3 {
+    font-size: 21px;
+    letter-spacing: 3px;
+    color: var(--sea-deep);
+    margin-bottom: 8px;
+}
+
+.item p:last-child {
+    font-size: 14px;
+    color: #5a5146;
+}
+
+/* ---------- 文化传承表格 ---------- */
+table {
+    width: 100%;
+    margin-top: 18px;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+caption {
+    padding-bottom: 12px;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--ink-light);
+}
+
+th, td {
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+    text-align: left;
+    vertical-align: top;
+}
+
+thead th {
+    background: linear-gradient(180deg, var(--red), var(--red-deep));
+    border-color: var(--red-deep);
+    color: var(--gold-light);
+    font-weight: 600;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+tbody tr:nth-child(even) { background: #fbf4e6; }
+tbody tr:hover { background: #f7ead0; }
+
+tbody th {
+    background: #f6e9cd;
+    color: var(--red-deep);
+    font-family: var(--font-kai);
+    font-size: 16px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+/* ---------- 页脚 ---------- */
+footer {
+    margin-top: 6px;
+    padding: 34px 20px 30px;
+    text-align: center;
+    background: linear-gradient(180deg, #5c1812, #3f0f0b);
+    border-top: 4px solid var(--gold);
+}
+
+p.footer-motto {
+    font-family: var(--font-kai);
+    font-size: 20px;
+    letter-spacing: 6px;
+    color: var(--gold-light);
+    margin-bottom: 12px;
+}
+
+footer p {
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.62);
+}
+
+/* ---------- 响应式适配 ---------- */
+@media (max-width: 900px) {
+    .card-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .intro-layout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    .site-nav {
+        flex-direction: column;
+        padding: 6px 12px 0;
+    }
+
+    p.nav-brand {
+        padding: 6px 0 2px;
+        font-size: 20px;
+        letter-spacing: 6px;
+    }
+
+    .site-nav ul { justify-content: center; }
+
+    a.nav-link {
+        padding: 10px 12px;
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+
+    .hero { padding: 58px 16px 84px; }
+    .hero h1 { letter-spacing: 8px; text-indent: 8px; }
+    p.hero-sub { font-size: 15px; letter-spacing: 2px; }
+
+    main { margin-top: -34px; padding: 0 14px 40px; }
+    section { padding: 22px 18px 24px; }
+
+    section h2 { font-size: 24px; letter-spacing: 4px; }
+    section h2::before,
+    section h2::after { margin: 0 10px; }
+
+    .timeline li { padding-left: 62px; }
+    .timeline::before { left: 19px; }
+
+    .timeline li::before {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 18px;
+    }
+
+    table { font-size: 13px; }
+    th, td { padding: 8px 10px; }
+}

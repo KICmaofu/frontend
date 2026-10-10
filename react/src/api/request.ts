@@ -26,9 +26,11 @@ export const TOKEN_KEY = 'learn-demo-token'
 
 // ── ① 实例: 一个项目共用一个, 公共配置集中在这里 ─────────────
 const http = axios.create({
-  // dev 环境由 mock-api.ts 这个 Vite 插件接管 /api 前缀;
-  // 对接真实后端时改成后端地址, 或在 vite.config.ts 里配置 server.proxy
-  baseURL: '/api',
+  // baseURL 来自环境变量(.env.development / .env.production):
+  //   dev: '/api'  -> 请求先到 dev server, 由 mock 插件或代理(server.proxy)接管
+  //   prod: '/api' -> 同域部署由 nginx 反代; 前后端不同域时改成完整后端地址
+  // 切换逻辑与 cors/跨域说明见 vite.config.ts
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   timeout: 10_000,
 })
 

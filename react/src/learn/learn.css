@@ -256,6 +256,21 @@
   border: 1px solid var(--accent-border);
 }
 
+/* TypeScript 示例: 当前选中的按钮用反色高亮 */
+.learn-btn.active {
+  color: var(--bg);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* TypeScript 示例: JSON 输入框撑满卡片宽度并使用等宽字体 */
+.learn-demo .learn-code-input {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--mono);
+  font-size: 13.5px;
+}
+
 @media (max-width: 1024px) {
   .learn-page {
     padding: 24px 20px 48px;

@@ -1,0 +1,21 @@
+body {
+    text-align: center;
+    font-size: 18px;
+}
+p {
+    text-align: center;
+}
+h1 {
+    text-align: center;
+}
+p.active {
+    text-align: left;
+}
+p.search {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: blue;
+}
+
+
