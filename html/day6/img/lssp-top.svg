@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 顶部背景图像：明亮清新的绿色食品主题横幅（浅绿渐变 + 蔬果插画） -->
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="180" viewBox="0 0 960 180">
+    <defs>
+        <linearGradient id="topBg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f4fbeb"/>
+            <stop offset="1" stop-color="#cdecc7"/>
+        </linearGradient>
+    </defs>
+    <!-- 明亮渐变背景 -->
+    <rect width="960" height="180" fill="url(#topBg)"/>
+    <!-- 浅色装饰气泡 -->
+    <circle cx="140" cy="44" r="26" fill="#ffffff" opacity="0.35"/>
+    <circle cx="480" cy="34" r="18" fill="#ffffff" opacity="0.3"/>
+    <circle cx="840" cy="42" r="32" fill="#ffffff" opacity="0.3"/>
+    <!-- 草地波浪 -->
+    <path d="M0,130 Q120,112 240,128 T480,128 T720,128 T960,130 L960,180 L0,180 Z" fill="#a9d8a0"/>
+    <path d="M0,152 Q160,138 320,150 T640,150 T960,152 L960,180 L0,180 Z" fill="#8ac986"/>
+    <!-- 青苹果 -->
+    <circle cx="110" cy="94" r="30" fill="#8ccb6f"/>
+    <ellipse cx="99" cy="82" rx="9" ry="13" fill="#ffffff" opacity="0.35"/>
+    <rect x="106" y="56" width="5" height="12" rx="2.5" fill="#7a5a33"/>
+    <path d="M116,62 Q130,48 144,56 Q132,70 116,62 Z" fill="#5fa85c"/>
+    <!-- 番茄 -->
+    <circle cx="240" cy="98" r="26" fill="#e5523f"/>
+    <ellipse cx="231" cy="88" rx="8" ry="11" fill="#ffffff" opacity="0.3"/>
+    <path d="M240,74 l7,10 -14,0 z" fill="#4e9a4b"/>
+    <path d="M226,78 l10,5 -8,7 z" fill="#4e9a4b"/>
+    <path d="M254,78 l-10,5 8,7 z" fill="#4e9a4b"/>
+    <!-- 猕猴桃切面 -->
+    <circle cx="370" cy="96" r="27" fill="#9cbf67"/>
+    <circle cx="370" cy="96" r="22" fill="#d8eca9"/>
+    <circle cx="370" cy="96" r="8" fill="#f7fce9"/>
+    <circle cx="385" cy="96" r="2.2" fill="#5c6b33"/>
+    <circle cx="377.5" cy="109" r="2.2" fill="#5c6b33"/>
+    <circle cx="362.5" cy="109" r="2.2" fill="#5c6b33"/>
+    <circle cx="355" cy="96" r="2.2" fill="#5c6b33"/>
+    <circle cx="362.5" cy="83" r="2.2" fill="#5c6b33"/>
+    <circle cx="377.5" cy="83" r="2.2" fill="#5c6b33"/>
+    <!-- 青柠与叶 -->
+    <circle cx="500" cy="98" r="24" fill="#a5d03e"/>
+    <ellipse cx="492" cy="89" rx="7" ry="10" fill="#ffffff" opacity="0.3"/>
+    <path d="M486,74 Q472,58 454,66 Q468,82 486,74 Z" fill="#63ab57"/>
+    <!-- 生菜 -->
+    <path d="M600,118 a34,34 0 0 1 68,0 Z" fill="#79c25b"/>
+    <path d="M610,118 a24,24 0 0 1 48,0 Z" fill="#95d175"/>
+    <path d="M620,118 a14,14 0 0 1 28,0 Z" fill="#b3e094"/>
+    <!-- 黄瓜 -->
+    <g transform="rotate(-14 760 100)">
+        <ellipse cx="760" cy="100" rx="44" ry="17" fill="#5fa84a"/>
+        <ellipse cx="748" cy="94" rx="14" ry="6" fill="#ffffff" opacity="0.25"/>
+        <circle cx="778" cy="96" r="2.2" fill="#4c8d3c"/>
+        <circle cx="768" cy="107" r="2.2" fill="#4c8d3c"/>
+    </g>
+    <!-- 葡萄串 -->
+    <circle cx="880" cy="86" r="13" fill="#9c74b8"/>
+    <circle cx="866" cy="102" r="13" fill="#8a63a8"/>
+    <circle cx="894" cy="102" r="13" fill="#8a63a8"/>
+    <circle cx="880" cy="116" r="13" fill="#7a5599"/>
+    <path d="M880,72 q8,-10 18,-8 q-8,10 -18,8 Z" fill="#5fa85c"/>
+</svg>

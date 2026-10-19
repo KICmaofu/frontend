@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 底部背景图像：沉稳温暖的绿色食品主题横幅（深绿渐变 + 麦穗与蔬果） -->
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="180" viewBox="0 0 960 180">
+    <defs>
+        <linearGradient id="botBg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#3c7d42"/>
+            <stop offset="1" stop-color="#1f4f26"/>
+        </linearGradient>
+    </defs>
+    <!-- 深绿渐变背景 -->
+    <rect width="960" height="180" fill="url(#botBg)"/>
+    <!-- 中央光晕 -->
+    <circle cx="480" cy="90" r="130" fill="#ffffff" opacity="0.07"/>
+    <circle cx="480" cy="90" r="84" fill="#ffffff" opacity="0.06"/>
+    <!-- 光点 -->
+    <circle cx="180" cy="42" r="3" fill="#ffffff" opacity="0.4"/>
+    <circle cx="320" cy="26" r="2.4" fill="#ffffff" opacity="0.35"/>
+    <circle cx="640" cy="30" r="2.6" fill="#ffffff" opacity="0.35"/>
+    <circle cx="790" cy="48" r="3" fill="#ffffff" opacity="0.4"/>
+    <!-- 远处田垄波浪 -->
+    <path d="M0,132 Q160,118 320,130 T640,130 T960,132 L960,180 L0,180 Z" fill="#2b6331"/>
+    <path d="M0,154 Q160,142 320,152 T640,152 T960,154 L960,180 L0,180 Z" fill="#1c4521"/>
+    <!-- 左侧麦穗 -->
+    <path d="M300,152 Q308,106 314,64" stroke="#c9a94e" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="314" cy="60" rx="4.5" ry="10" fill="#e6c46a"/>
+    <ellipse cx="320" cy="76" rx="4.5" ry="10" fill="#ddb95c" transform="rotate(35 320 76)"/>
+    <ellipse cx="325" cy="92" rx="4.5" ry="10" fill="#ddb95c" transform="rotate(35 325 92)"/>
+    <ellipse cx="328" cy="108" rx="4.5" ry="10" fill="#ddb95c" transform="rotate(35 328 108)"/>
+    <ellipse cx="329" cy="124" rx="4.5" ry="10" fill="#ddb95c" transform="rotate(35 329 124)"/>
+    <ellipse cx="305" cy="80" rx="4.5" ry="10" fill="#d1ad52" transform="rotate(-35 305 80)"/>
+    <ellipse cx="302" cy="96" rx="4.5" ry="10" fill="#d1ad52" transform="rotate(-35 302 96)"/>
+    <ellipse cx="302" cy="112" rx="4.5" ry="10" fill="#d1ad52" transform="rotate(-35 302 112)"/>
+    <ellipse cx="303" cy="128" rx="4.5" ry="10" fill="#d1ad52" transform="rotate(-35 303 128)"/>
+    <!-- 右侧麦穗 -->
+    <path d="M660,152 Q652,106 646,64" stroke="#c9a94e" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="646" cy="60" rx="4.5" ry="10" fill="#e6c46a"/>
+    <ellipse cx="640" cy="76" rx="4.5" ry="10" fill="#ddb95c" transform="rotate(-35 640 76)"/>
+    <ellipse cx="635" cy="92" rx="4.5" ry="10" fill="#ddb95c" transform="rotate(-35 635 92)"/>
+    <ellipse cx="632" cy="108" rx="4.5" ry="10" fill="#ddb95c" transform="rotate(-35 632 108)"/>
+    <ellipse cx="631" cy="124" rx="4.5" ry="10" fill="#ddb95c" transform="rotate(-35 631 124)"/>
+    <ellipse cx="655" cy="80" rx="4.5" ry="10" fill="#d1ad52" transform="rotate(35 655 80)"/>
+    <ellipse cx="658" cy="96" rx="4.5" ry="10" fill="#d1ad52" transform="rotate(35 658 96)"/>
+    <ellipse cx="658" cy="112" rx="4.5" ry="10" fill="#d1ad52" transform="rotate(35 658 112)"/>
+    <ellipse cx="657" cy="128" rx="4.5" ry="10" fill="#d1ad52" transform="rotate(35 657 128)"/>
+    <!-- 中央蔬果堆 -->
+    <path d="M480,82 Q494,60 516,66 Q502,88 480,82 Z" fill="#8fd07a"/>
+    <path d="M472,84 Q456,66 436,74 Q450,94 472,84 Z" fill="#79c25b"/>
+    <circle cx="562" cy="110" r="15" fill="#9cbf67"/>
+    <circle cx="562" cy="110" r="10" fill="#d8eca9"/>
+    <circle cx="524" cy="120" r="19" fill="#a5d03e"/>
+    <circle cx="482" cy="110" r="25" fill="#e0523d"/>
+    <ellipse cx="472" cy="100" rx="8" ry="11" fill="#ffffff" opacity="0.25"/>
+    <path d="M482,84 l7,10 -14,0 z" fill="#4e9a4b"/>
+    <circle cx="440" cy="122" r="20" fill="#7cc576"/>
+    <circle cx="398" cy="128" r="15" fill="#8ccb6f"/>
+    <!-- 草叶点缀 -->
+    <path d="M520,152 q6,-18 20,-24" stroke="#61a859" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M540,154 q4,-14 16,-20" stroke="#79c25b" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M420,152 q-6,-16 -18,-22" stroke="#61a859" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>

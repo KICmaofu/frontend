@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import axios from 'axios'
 import {
   Alert,
   App as AntdApp,
@@ -12,7 +13,7 @@ import {
   Tag,
 } from 'antd'
 import type { TableColumnsType } from 'antd'
-import { api, subscribeInterceptorLog, TOKEN_KEY } from '../api/request'
+import { api, request, subscribeInterceptorLog, TOKEN_KEY } from '../api/request'
 import type { InterceptorLog } from '../api/request'
 import { createTodo, fetchProfile, fetchTodos } from '../api/todo'
 import type { Profile, TodoItem } from '../api/todo'
@@ -22,7 +23,8 @@ import type { Profile, TodoItem } from '../api/todo'
 // mock 后端: 根目录 mock-api.ts(Vite 插件, 仅 dev 环境)
 //
 // 本页每个按钮都会发出一次真实请求, 拦截器的执行过程通过底部日志面板实时展示;
-// 页面里的 catch 都只做"局部状态收尾", 错误提示全部由响应拦截器统一负责
+// 页面里的 catch 都只做"局部状态收尾", 错误提示全部由响应拦截器统一负责;
+// 第 4 节额外演示请求取消: AbortController + config.signal(慢接口见 mock-api.ts)
 
 const todoColumns: TableColumnsType<TodoItem> = [
   { title: 'ID', dataIndex: 'id', width: 64 },
@@ -191,7 +193,103 @@ function AuthSection() {
   )
 }
 
-// ── 3. 拦截器日志面板 ───────────────────────────────────────
+// ── 4. 请求取消机制: AbortController + config.signal ────────
+// 取消的三个典型场景:
+//   ① 用户等不及了: 慢请求点击"取消"立刻中止(本节可演示)
+//   ② 连续触发防竞态: 新请求发出前先 abort 旧的, 只认最后一次的结果
+//      (连点"发起慢请求"即可看到: 旧请求被取消, 过期结果被丢弃)
+//   ③ 组件卸载: useEffect 清理函数里 abort, 避免请求回来时对已卸载组件 setState
+// 取消不是故障: axios 抛 CanceledError(code=ERR_CANCELED), 响应拦截器对它
+// 静默处理(只记日志, 不弹错误提示); 组件里用 axios.isCancel 区分"取消"与"真失败"
+
+type SlowPhase = 'idle' | 'pending' | 'success' | 'canceled'
+
+interface SlowResult {
+  text: string
+  servedAt: string
+}
+
+const phaseText: Record<SlowPhase, string> = {
+  idle: '未发起',
+  pending: '等待中…',
+  success: '已完成',
+  canceled: '已取消',
+}
+
+const phaseColor: Record<SlowPhase, string> = {
+  idle: 'default',
+  pending: 'processing',
+  success: 'success',
+  canceled: 'warning',
+}
+
+function CancelSection() {
+  const [phase, setPhase] = useState<SlowPhase>('idle')
+  const [result, setResult] = useState('')
+  const ctrlRef = useRef<AbortController | null>(null)
+
+  const start = async () => {
+    // 场景②: 仍有请求在途时先取消它 —— 连点多次只有最后一次的结果算数
+    ctrlRef.current?.abort()
+    const ctrl = new AbortController()
+    ctrlRef.current = ctrl
+
+    setPhase('pending')
+    setResult('正在等待慢接口返回(约 5 秒)…')
+
+    try {
+      // signal 是 axios config 的原生字段, 无需额外封装即可取消
+      const data = await request<SlowResult>({ url: '/slow', method: 'GET', signal: ctrl.signal })
+      // 结果回来时若已被更新一轮的点击取代, 丢弃过期结果(这就是防竞态)
+      if (ctrlRef.current !== ctrl) return
+      setPhase('success')
+      setResult(`${data.text}(服务端于 ${data.servedAt} 完成)`)
+    } catch (error) {
+      // 被新请求取代的旧请求: 收尾交给新一轮, 自己不碰任何状态
+      if (ctrlRef.current !== ctrl) return
+      if (axios.isCancel(error)) {
+        setPhase('canceled')
+        setResult('请求已取消: axios 抛出 CanceledError, 拦截器静默处理, 不会弹全局提示')
+      } else {
+        // 真失败: 提示已由响应拦截器统一弹出, 这里只复位局部状态
+        setPhase('idle')
+        setResult('')
+      }
+    } finally {
+      // 只清"自己"的引用; 若已被新请求取代, 不能把新一轮的引用清掉
+      if (ctrlRef.current === ctrl) ctrlRef.current = null
+    }
+  }
+
+  const cancel = () => {
+    ctrlRef.current?.abort()
+  }
+
+  return (
+    <Card size="small" title="请求取消: AbortController + config.signal">
+      <Space wrap>
+        <Button type="primary" onClick={() => void start()} loading={phase === 'pending'}>
+          发起慢请求(GET /api/slow, 约 5 秒)
+        </Button>
+        <Button danger onClick={cancel} disabled={phase !== 'pending'}>
+          取消当前请求
+        </Button>
+        <Tag color={phaseColor[phase]}>{phaseText[phase]}</Tag>
+      </Space>
+
+      <p style={{ marginTop: 12 }}>
+        {result || '点击「发起慢请求」后再点「取消当前请求」: 请求会立刻中止, 且不会弹错误提示'}
+      </p>
+      <p style={{ opacity: 0.8 }}>
+        连点「发起慢请求」是另一个场景: 每次点击先取消上一次未完成的请求, 只保留最新一次的结果;
+        组件卸载时在 useEffect 清理函数里调用 ctrl.abort() 是同样的套路, 可避免对已卸载
+        组件 setState
+      </p>
+    </Card>
+  )
+}
+
+// ── 5. 拦截器日志面板 ───────────────────────────────────────
 
 const stageColor: Record<InterceptorLog['stage'], string> = {
   请求拦截器: 'blue',
@@ -247,6 +345,7 @@ function RequestDemo() {
             <p>① axios.create 创建实例: baseURL '/api'、超时 10s 等公共配置只写一次</p>
             <p>② 请求拦截器: 自动从 localStorage 取 token 注入 Authorization 头</p>
             <p>③ 响应拦截器: code !== 0 或 HTTP 4xx/5xx 时统一弹出错误提示</p>
+            <p>④ 请求取消: config 传 signal(AbortController), 取消错误静默处理不误报</p>
             <p>业务侧调用 request&lt;T&gt;() / api.get / api.post, 拿到的就是解包后的 data</p>
           </>
         }
@@ -258,7 +357,10 @@ function RequestDemo() {
       <h3>3. 登录态与错误: 401 / 500 的统一处理</h3>
       <AuthSection />
 
-      <h3>4. 拦截器日志: 观察每次请求的完整链路</h3>
+      <h3>4. 请求取消: AbortController + config.signal</h3>
+      <CancelSection />
+
+      <h3>5. 拦截器日志: 观察每次请求的完整链路</h3>
       <InterceptorLogPanel />
     </div>
   )

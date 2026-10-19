@@ -271,8 +271,403 @@
   font-size: 13.5px;
 }
 
+/* SSE 示例: 流式输出框(等宽字体、保留换行与空格) */
+.learn-stream-box {
+  min-height: 96px;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  font-family: var(--mono);
+  font-size: 13.5px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* SSE 示例: 打字机光标, 输出期间持续闪烁 */
+.learn-stream-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.12em;
+  background: var(--accent);
+  animation: learn-caret-blink 1s steps(2, start) infinite;
+}
+
+@keyframes learn-caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 @media (max-width: 1024px) {
   .learn-page {
     padding: 24px 20px 48px;
   }
+}
+
+/* ── Markdown 渲染示例 ────────────────────────────────────── */
+
+/* 渲染结果面板: Markdown 生成的内容都包在这里;
+   这些规则会覆盖 .learn-demo 为演示表单准备的 h3 / ul / li / code 通用样式 */
+.learn-md-panel {
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  text-align: left;
+  overflow-wrap: break-word;
+}
+
+.learn-md-panel > *:first-child {
+  margin-top: 0;
+}
+
+.learn-md-panel h1,
+.learn-md-panel h2,
+.learn-md-panel h3,
+.learn-md-panel h4 {
+  color: var(--text-h);
+  line-height: 1.35;
+  margin: 18px 0 8px;
+}
+
+.learn-md-panel h1 {
+  font-size: 26px;
+}
+
+.learn-md-panel h2 {
+  font-size: 21px;
+}
+
+.learn-md-panel h3 {
+  font-size: 18px;
+}
+
+.learn-md-panel h4 {
+  font-size: 16px;
+}
+
+.learn-md-panel p {
+  margin: 10px 0;
+}
+
+.learn-md-panel a {
+  color: var(--accent);
+}
+
+/* 列表: 覆盖 .learn-demo 的 flex 布局, 恢复标准列表缩进 */
+.learn-md-panel ul,
+.learn-md-panel ol {
+  display: block;
+  margin: 10px 0;
+  padding-left: 26px;
+}
+
+.learn-md-panel li {
+  display: list-item;
+  margin: 4px 0;
+}
+
+/* 任务列表(GFM)的复选框: 与文字基线对齐 */
+.learn-md-panel li input[type='checkbox'] {
+  margin: 0 6px 0 0;
+  vertical-align: -1px;
+}
+
+/* 引用块: 左侧竖线 */
+.learn-md-panel blockquote {
+  margin: 10px 0;
+  padding: 2px 0 2px 14px;
+  border-left: 3px solid var(--accent-border);
+  color: var(--text);
+}
+
+/* 表格(GFM) */
+.learn-md-panel table {
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+.learn-md-panel th,
+.learn-md-panel td {
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  text-align: left;
+}
+
+.learn-md-panel th {
+  background: var(--social-bg);
+  color: var(--text-h);
+}
+
+.learn-md-panel hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 16px 0;
+}
+
+/* 行内代码: 反引号包住的部分, 块内代码由下面的规则接管 */
+.learn-md-panel :not(pre) > code {
+  display: inline;
+  font-family: var(--mono);
+  font-size: 0.85em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--text-h);
+  background: var(--code-bg);
+}
+
+/* 代码块: 外层 pre 只管间距, 底色与内边距由高亮器主题提供 */
+.learn-md-panel pre {
+  margin: 10px 0;
+}
+
+/* 高亮器内部会渲染一个 <code>, 重置掉全局行内代码样式的底色与内边距 */
+.learn-md-panel pre code {
+  display: block;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+}
+
+/* 没标注语言的围栏没有高亮器包裹, 退化为普通代码块样式 */
+.learn-md-panel pre > code {
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--code-bg);
+}
+
+/* 实时编辑: 左输入右预览两栏布局 */
+.learn-md-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+/* 左侧编辑框: 等宽字体, 与右侧预览同高 */
+.learn-md-split textarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 420px;
+  padding: 12px 14px;
+  font-family: var(--mono);
+  font-size: 13.5px;
+  line-height: 1.7;
+  resize: vertical;
+}
+
+/* 右侧预览: 超出高度滚动 */
+.learn-md-split .learn-md-panel {
+  max-height: 420px;
+  overflow: auto;
+}
+
+@media (max-width: 1024px) {
+  /* 小屏改为上下排列 */
+  .learn-md-split {
+    grid-template-columns: 1fr;
+  }
+
+  .learn-md-split textarea {
+    min-height: 220px;
+  }
+
+  .learn-md-split .learn-md-panel {
+    max-height: none;
+  }
+}
+
+/* ── 知识库原型示例 ──────────────────────────────────────── */
+
+/* 上传区下方的演示说明 */
+.learn-kb-tip {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* 文件选择区: 虚线框, 拖拽悬停时高亮 */
+.learn-kb-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-sizing: border-box;
+  padding: 26px 16px;
+  border: 1.5px dashed var(--border);
+  border-radius: 8px;
+  background: var(--social-bg);
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.learn-kb-dropzone:hover {
+  border-color: var(--accent-border);
+}
+
+.learn-kb-dropzone:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.learn-kb-dropzone.dragging {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.learn-kb-dropzone p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.learn-kb-dropzone-icon {
+  font-size: 26px;
+  color: var(--accent);
+}
+
+.learn-kb-dropzone .learn-kb-dropzone-hint {
+  font-size: 13px;
+  color: var(--text);
+  opacity: 0.75;
+}
+
+/* 上传任务列表: 任务多时区域内部滚动, 不拉长页面 */
+.learn-kb-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.learn-kb-task {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.learn-kb-task-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 文件名过长时省略号截断(min-width: 0 让 flex 子项允许收缩) */
+.learn-kb-task-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  color: var(--text-h);
+}
+
+.learn-kb-task-size {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--text);
+  opacity: 0.8;
+}
+
+.learn-kb-task-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.learn-kb-task-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 进度条轨道 */
+.learn-kb-progress {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+/* 进度条填充: 宽度由行内 style 驱动, 过渡让每次进度回调平滑前进 */
+.learn-kb-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.learn-kb-progress-fill.success {
+  background: #16a34a;
+}
+
+.learn-kb-progress-fill.failed {
+  background: #e5484d;
+}
+
+.learn-kb-progress-fill.canceled {
+  background: #9ca3af;
+}
+
+/* 上传中的条纹流动动画: 静态画面里也能看出"正在进行" */
+.learn-kb-progress-fill.active {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.25) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.25) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 16px 16px;
+  animation: learn-kb-stripes 0.8s linear infinite;
+}
+
+@keyframes learn-kb-stripes {
+  to {
+    background-position: 16px 0;
+  }
+}
+
+.learn-kb-task-percent {
+  width: 44px;
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--text);
+}
+
+.learn-kb-task-error {
+  margin: 0;
+}
+
+/* 文档列表: 名称前的图标与长名截断 */
+.learn-kb-doc-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 420px;
+}
+
+.learn-kb-doc-icon {
+  color: var(--accent);
 }

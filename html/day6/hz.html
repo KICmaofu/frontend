@@ -1,0 +1,189 @@
+<!-- HTML5 文档类型声明：告诉浏览器按标准模式渲染本页 -->
+<!DOCTYPE html>
+<!-- html：根元素；lang="zh-CN" 声明本页语言为简体中文，利于浏览器和屏幕阅读器正确识别 -->
+<html lang="zh-CN">
+<!-- head：页面配置区，放置字符集、标题、样式等信息，内容不会直接显示在页面上 -->
+<head>
+    <!-- 声明字符编码为 UTF-8，避免中文乱码 -->
+    <meta charset="UTF-8">
+    <!-- 浏览器标签页上显示的标题 -->
+    <title>静夜思</title>
+    <!-- style：页内样式表，用 CSS 描述整个页面的外观 -->
+    <style>
+        /* 引入本地字体文件 FZJZJW.TTF（与 HTML 同目录，用相对路径引用） */
+        @font-face {
+            font-family: "FZJZJW"; /* 自定义字体名称；必须与下方 body 中引用的名称一致，字体才会生效 */
+            /* 字体文件地址；format("truetype") 声明文件为 TTF 格式 */
+            src: url("FZJZJW.TTF") format("truetype");
+            /* 字体加载完成前先用回退字体显示，加载完自动替换，避免文字长时间空白 */
+            font-display: swap;
+        }
+        /* 整页使用自定义字体（方正剪纸简体），缺失的字符回退到楷体/衬线字体 */
+        body {
+            font-family: "FZJZJW", "KaiTi", "楷体", serif;
+            /* 清除浏览器默认的页面外边距 */
+            margin: 0;
+            /* 上下留 40px、左右留 16px，避免内容紧贴屏幕边缘 */
+            padding: 40px 16px;
+            /* 让内边距计入元素宽度，宽高的计算更直观 */
+            box-sizing: border-box;
+            /* 页面高度至少撑满整个视口，卡片才能全屏垂直居中 */
+            min-height: 100vh;
+            /* 弹性布局：让卡片、演示区自上而下排列并整体居中 */
+            display: flex; /* 开启弹性布局 */
+            flex-direction: column; /* 主轴改为纵向：卡片和演示区上下排列 */
+            justify-content: center; /* 主轴（纵向）居中 */
+            align-items: center; /* 交叉轴（横向）居中 */
+            /* 页面背景：淡雅的纸色渐变，由左上向右下逐渐加深 */
+            background: linear-gradient(160deg, #fdfaf3 0%, #f2e8d8 100%);
+        }
+        /* .poem-card：承载标题、署名与诗句的“宣纸卡片” */
+        .poem-card {
+            /* 小屏时铺满可用宽度，大屏时最宽 460px，避免卡片过宽 */
+            width: 100%;/* 小屏时铺满可用宽度 */
+            max-width: 460px; /* 大屏时最宽 460px，避免卡片过宽 */
+            box-sizing: border-box; /* 让内边距计入元素宽度，宽高的计算更直观 */
+            padding: 48px 40px; /* 上下内边距 48px，左右内边距 40px */
+            text-align: center; /* 文字居中对齐 */
+            background: #fffdf8; /* 卡片背景色 */
+            border: 1px solid #eadfca; /* 卡片边框 */
+            border-radius: 12px; /* 卡片圆角 */
+            /* 柔和投影让卡片从背景中“浮”起来 */
+            box-shadow: 0 12px 32px rgba(90, 70, 50, 0.12); /* 柔和投影让卡片从背景中“浮”起来 */
+        }
+        /* .author：作者署名（类选择器），灰褐色小字；类选择器优先级高于标签选择器，会覆盖 p 的颜色 */
+        .author {
+            font-size: 16px; /* 灰褐色小字 */
+            font-weight: normal; //
+        color: #9b8a76; /* 灰褐色 */
+            letter-spacing: 4px; /* 字母间距 */
+            margin: 0;
+        }
+        /* .author::after：在署名下方画一条红色短线，分隔题头与正文 */
+        .author::after {
+            content: "";//
+        display: block; //
+        width: 48px; /* 线条宽度 */
+            height: 2px; /* 线条高度 */
+            margin: 20px auto 0; /* 线条外边距 */
+            background: #b8563f; /* 线条背景色 */
+            border-radius: 1px; /* 线条圆角 */
+        }
+        /* .verse：诗句（类选择器），字号稍大、行距放宽，阅读更舒展 */
+        .verse {
+            font-size: 22px; /* 字号稍大 */
+            font-weight: bold; /* 加粗 */
+            line-height: 2.2; /* 行距放宽 */
+            letter-spacing: 2px; /* 字母间距 */
+            margin: 32px 0 0; /* 上下外边距 */
+            text-shadow: 1px 1px 2px rgba(61, 50, 41, 0.15); /* 文字阴影 */
+        }
+        /* .verse br：后代选择器，选中诗句内部的换行标签；br 是空标签，自身没有文字，要控制行距应写在 .verse 上 */
+        .verse br {
+            line-height: 20px; /* 行距 */
+            color:red; /* 红色 */
+        }
+        /* p：所有段落的通用样式，深墨色文字；类选择器优先级高于标签选择器，所以 .author/.verse 会覆盖这里的样式 */
+        p {
+            font-size: 20px; /* 字号 */
+            line-height: 2; /* 行距 */
+            color: #3d3229; /* 深墨色 */
+            margin: 0; /* 上下外边距 */
+            text-shadow: 1px 1px 2px rgba(61, 50, 41, 0.15); /* 文字阴影 */
+        }
+        /* h1：标题样式，深墨色、大字号并拉开字距，更有古风感 */
+        h1 {
+            font-size: 36px; /* 大字号 */
+            letter-spacing: 8px; /* 字母间距 */
+            color: #3a2e25; /* 深墨色 */
+            margin: 0;
+            text-shadow: 2px 3px 6px rgba(58, 46, 37, 0.15); /* 文字阴影 */
+        }
+        /* ==================== 盒子演示区：div + 边框 / 圆角 / 阴影 ==================== */
+        /* div 是块级元素：默认独占一行，常用来划分区域、包裹内容，也就是一个个“盒子” */
+        /* .demo-wrap：演示区容器，宽度与卡片一致，用 auto 外边距水平居中 */
+        .demo-wrap {
+            width: 100%; /* 小屏时铺满可用宽度 */
+            max-width: 460px; /* 与上方卡片同宽 */
+            box-sizing: border-box; /* 让内边距、边框计入元素宽度 */
+            margin: 32px auto 0; /* 与上方卡片拉开 32px 距离，auto 让盒子在页面中间 */
+            padding: 28px 24px; /* 内边距：内容与盒子边缘之间的留白 */
+            text-align: center; /* 文字居中 */
+            background: #fffdf8; /* 与卡片一致的纸色背景 */
+            border: 1px solid #eadfca; /* 细实线边框 */
+            border-radius: 12px; /* 圆角 */
+            box-shadow: 0 12px 32px rgba(90, 70, 50, 0.12); /* 柔和投影 */
+        }
+        /* .demo-wrap h2：演示区小标题 */
+        .demo-wrap h2 {
+            margin: 0 0 20px; /* 与下方第一个盒子拉开距离 */
+            font-size: 20px; /* 字号 */
+            letter-spacing: 4px; /* 字母间距 */
+            color: #3a2e25; /* 深墨色 */
+        }
+        /* .demo-box：所有演示盒子共用的基础样式（尺寸、留白、背景） */
+        .demo-box {
+            box-sizing: border-box; /* 让内边距、边框计入元素宽度 */
+            margin-bottom: 18px; /* 盒子与下一个盒子之间的垂直间隔 */
+            padding: 16px; /* 内边距（内容到边框的距离） */
+            font-size: 16px; /* 字号 */
+            background: #fbf3e4; /* 浅纸色背景 */
+            color: #3d3229; /* 深墨色文字 */
+        }
+        /* 演示 1：边框 border —— 语法：粗细 样式 颜色，三部分缺一不可 */
+        .border-demo {
+            border: 3px solid #b8563f; /* solid 实线；还可以是 dashed 虚线、dotted 点线、double 双线 */
+        }
+        /* 演示 2：圆角 border-radius —— 数值越大角越圆；写成 50% 会变成圆形 */
+        .radius-demo {
+            border: 3px dashed #8c2f25; /* 虚线边框 */
+            border-radius: 24px; /* 四个角都切成半径 24px 的圆弧 */
+        }
+        /* 演示 3：阴影 box-shadow —— 语法：水平偏移 垂直偏移 模糊半径 颜色 */
+        .shadow-demo {
+            box-shadow: 0 10px 24px rgba(90, 70, 50, 0.35); /* 影子向下偏移 10px、模糊 24px、半透明咖啡色 */
+        }
+        /* 演示 4：内阴影 + 胶囊圆角 —— 颜色前加 inset 关键字，阴影画在盒子内部 */
+        .round-demo {
+            border: 2px solid #c9b795; /* 浅色细边框 */
+            border-radius: 999px; /* 圆角足够大时，两端变成半圆的“胶囊”形状 */
+            box-shadow: inset 0 3px 8px rgba(90, 70, 50, 0.25); /* inset：内阴影，像盒子被压凹进去 */
+        }
+    </style>
+</head>
+<!-- body：页面可见内容区，展示给用户的内容都写在这里 -->
+<body>
+<!-- .poem-card：把所有内容包进一张居中的卡片，统一留白与背景 -->
+<div class="poem-card">
+    <!-- 标题：诗名 -->
+    <h1>静夜思</h1>
+    <!-- 作者署名：p 标签套用 .author 类 -->
+    <p class="author">唐 · 李白</p>
+    <!-- 第一段诗句：外层用 div 包裹，内部 p 套用 .verse 类，br 标签负责句内换行 -->
+    <div>
+        <p class="verse">
+            床前明月光，疑是地上霜。<br>
+            举头望明月，低头思故乡。
+        </p>
+    </div>
+    <!-- 第二段诗句：内容与上方相同，只是不用 div 包裹，直接使用 .verse 类 -->
+    <p class="verse">
+        床前明月光，疑是地上霜。<br>
+        举头望明月，低头思故乡。
+    </p>
+</div>
+<!-- ==================== 盒子演示区：div + 边框 / 圆角 / 阴影 ==================== -->
+<!-- div 是块级容器：默认独占一行；下面每个演示都是一个 div“盒子” -->
+<div class="demo-wrap">
+    <h2>盒子三件套</h2>
+    <!-- 演示 1：border 边框 —— 3px 粗细、solid 实线、朱砂色 -->
+    <div class="demo-box border-demo">border：3px 实线边框</div>
+    <!-- 演示 2：border-radius 圆角 —— 虚线边框 + 24px 圆角，四个角变圆滑 -->
+    <div class="demo-box radius-demo">border-radius：虚线边框 + 24px 圆角</div>
+    <!-- 演示 3：box-shadow 阴影 —— 向外投射柔和影子，盒子像浮在纸面上 -->
+    <div class="demo-box shadow-demo">box-shadow：向下的柔和外阴影</div>
+    <!-- 演示 4：inset 内阴影 + 胶囊圆角 —— 阴影画在盒子里面，像被压凹进去 -->
+    <div class="demo-box round-demo">inset 内阴影 + 胶囊圆角</div>
+</div>
+</body>
+</html>

@@ -2,17 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="18558cc9-14cc-4725-a431-947cd36b20b6" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/day4/school.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/day5/ancient poetry.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/day5/ancientpoetry.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/day5/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/day6/ancientpoetry.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/day6/hz.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/day6/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/day6/ys.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../react/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../react/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../react/mock-api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../react/mock-api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../react/src/api/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../react/src/api/request.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../react/src/learn/learn.css" beforeDir="false" afterPath="$PROJECT_DIR$/../react/src/learn/learn.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../react/src/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../react/src/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../react/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../react/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,11 +49,16 @@
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/git/frontend/html&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/git/frontend/html/day6&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;qoder.settings.profile.models&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\git\frontend\html\day6" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -79,6 +82,12 @@
       <workItem from="1791506840755" duration="8512000" />
       <workItem from="1791522499823" duration="1643000" />
       <workItem from="1791524223651" duration="11000" />
+      <workItem from="1791810621107" duration="9000" />
+      <workItem from="1791852450737" duration="28000" />
+      <workItem from="1791852490915" duration="41000" />
+      <workItem from="1791852559794" duration="8626000" />
+      <workItem from="1791864846006" duration="683000" />
+      <workItem from="1791885880311" duration="4000" />
     </task>
     <servers />
   </component>

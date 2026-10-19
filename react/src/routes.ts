@@ -9,8 +9,11 @@ import CommunicationDemo from './learn/CommunicationDemo'
 import ConditionalListDemo from './learn/ConditionalListDemo'
 import AntdDemo from './learn/AntdDemo'
 import RequestDemo from './learn/RequestDemo'
+import SseDemo from './learn/SseDemo'
 import ZustandDemo from './learn/ZustandDemo'
 import TypeScriptDemo from './learn/TypeScriptDemo'
+import MarkdownDemo from './learn/MarkdownDemo'
+import KnowledgeBaseDemo from './learn/KnowledgeBaseDemo'
 
 // ── 路由表: 路由与导航栏共用的"单一数据源" ────────────────────
 // App.tsx 用它批量生成 <Route>, Layout.tsx 用它批量生成导航 <NavLink>;
@@ -36,6 +39,9 @@ export const learnRoutes: LearnRoute[] = [
   { path: 'conditional-list', label: '条件与列表渲染', Component: ConditionalListDemo },
   { path: 'antd', label: 'Ant Design', Component: AntdDemo },
   { path: 'request', label: '网络请求', Component: RequestDemo },
+  { path: 'sse', label: 'SSE 流式', Component: SseDemo },
   { path: 'zustand', label: '状态管理', Component: ZustandDemo },
   { path: 'typescript', label: 'TypeScript 进阶', Component: TypeScriptDemo },
+  { path: 'markdown', label: 'Markdown 渲染', Component: MarkdownDemo },
+  { path: 'knowledge-base', label: '知识库原型', Component: KnowledgeBaseDemo },
 ]

@@ -6,12 +6,16 @@ import type { MessageInstance } from 'antd/es/message/interface'
 // ── axios 封装: 一个实例 + 请求/响应拦截器 ──────────────────
 //   src/api/request.ts  本文件: 封装请求库本身(基础设施)
 //   src/api/todo.ts     业务接口按模块划分, 只负责定义"调哪个接口"
+//   src/api/stream.ts   SSE 流式请求: fetch 手动解析事件流; 不走 axios, 因此不经拦截器
 //   mock-api.ts         根目录的 mock 后端(dev 环境由 Vite 插件提供接口)
 //
 // 三层结构:
 //   ① 实例: baseURL / 超时等公共配置只写一次
 //   ② 请求拦截器: 请求发出前统一处理(注入 token、记录耗时起点)
 //   ③ 响应拦截器: 响应回来后统一处理(检查业务码、统一报错)
+//   ④ 取消: 调用方给 config 传 signal(AbortController, axios 原生支持),
+//      取消产生的 CanceledError 在本文件里静默处理 —— "主动取消"不是故障,
+//      不该弹错误提示(演示见 RequestDemo 页)
 // 业务代码只调用 request<T>() / api.get / api.post, 不直接使用 axios
 
 // 后端约定的统一响应结构(mock-api.ts 与真实后端保持一致)
@@ -117,9 +121,19 @@ http.interceptors.response.use(
     return response
   },
   (error: AxiosError<ApiResponse<unknown>>) => {
-    // 走到这里说明 HTTP 层就失败了(状态码非 2xx)或没拿到响应(断网/超时)
+    // 走到这里说明 HTTP 层就失败了(状态码非 2xx)或没拿到响应(断网/超时/取消)
     const key = error.config ? requestKey(error.config) : '未知请求'
+    startedAt.delete(key)
     const { response, code } = error
+
+    // 请求被 AbortController 取消: axios 抛 CanceledError(code=ERR_CANCELED),
+    // 它同样没有 response, 若混进下面的分支会被误报成"网络异常"。
+    // 取消是调用方的主动行为而不是故障: 只记日志, 不弹全局错误提示;
+    // 组件里若要区分, 用 axios.isCancel(error) 判断(见 RequestDemo 页取消一节)
+    if (axios.isCancel(error)) {
+      emitLog('失败处理', `${key} 已取消 (AbortController)`)
+      return Promise.reject(error)
+    }
 
     let text: string
     if (code === 'ECONNABORTED' || code === 'ETIMEDOUT') {

@@ -1,0 +1,125 @@
+<!-- HTML5 文档类型声明：告诉浏览器按标准模式渲染本页 -->
+<!DOCTYPE html>
+<!-- html：根元素；lang="zh-CN" 声明本页语言为简体中文，利于浏览器和屏幕阅读器正确识别 -->
+<html lang="zh-CN">
+<!-- head：页面配置区，放置字符集、标题、样式等信息，内容不会直接显示在页面上 -->
+<head>
+    <!-- 声明字符编码为 UTF-8，避免中文乱码 -->
+    <meta charset="UTF-8">
+    <!-- 浏览器标签页上显示的标题 -->
+    <title>静夜思</title>
+  <!-- style：页内样式表，用 CSS 描述整个页面的外观 -->
+  <style>
+      /* 引入本地字体文件 FZJZJW.TTF（与 HTML 同目录，用相对路径引用） */
+      @font-face {
+          font-family: "FZJZJW"; /* 自定义字体名称；必须与下方 body 中引用的名称一致，字体才会生效 */
+          /* 字体文件地址；format("truetype") 声明文件为 TTF 格式 */
+          src: url("FZJZJW.TTF") format("truetype");
+          /* 字体加载完成前先用回退字体显示，加载完自动替换，避免文字长时间空白 */
+          font-display: swap;
+      }
+      /* 整页使用自定义字体（方正剪纸简体），缺失的字符回退到楷体/衬线字体 */
+      body {
+          font-family: "FZJZJW", "KaiTi", "楷体", serif;
+          /* 清除浏览器默认的页面外边距 */
+          margin: 0;
+          /* 上下留 40px、左右留 16px，避免内容紧贴屏幕边缘 */
+          padding: 40px 16px;
+          /* 让内边距计入元素宽度，宽高的计算更直观 */
+          box-sizing: border-box;
+          /* 页面高度至少撑满整个视口，卡片才能全屏垂直居中 */
+          min-height: 100vh;
+          /* 弹性布局：让卡片水平、垂直居中 */
+          display: flex; /* 弹性布局：让卡片水平、垂直居中 */
+          justify-content: center; /* 水平居中 */
+          align-items: center; /* 垂直居中 */
+          /* 页面背景：淡雅的纸色渐变，由左上向右下逐渐加深 */
+          background: linear-gradient(160deg, #fdfaf3 0%, #f2e8d8 100%);
+      }
+      /* .poem-card：承载标题、署名与诗句的“宣纸卡片” */
+      .poem-card {
+          /* 小屏时铺满可用宽度，大屏时最宽 460px，避免卡片过宽 */
+          width: 100%;/* 小屏时铺满可用宽度 */
+          max-width: 460px; /* 大屏时最宽 460px，避免卡片过宽 */
+          box-sizing: border-box; /* 让内边距计入元素宽度，宽高的计算更直观 */
+          padding: 48px 40px; /* 上下内边距 48px，左右内边距 40px */
+          text-align: center; /* 文字居中对齐 */
+          background: #fffdf8; /* 卡片背景色 */
+          border: 1px solid #eadfca; /* 卡片边框 */
+          border-radius: 12px; /* 卡片圆角 */
+          /* 柔和投影让卡片从背景中“浮”起来 */
+          box-shadow: 0 12px 32px rgba(90, 70, 50, 0.12); /* 柔和投影让卡片从背景中“浮”起来 */
+      }
+      /* .author：作者署名（类选择器），灰褐色小字；类选择器优先级高于标签选择器，会覆盖 p 的颜色 */
+      .author {
+          font-size: 16px; /* 灰褐色小字 */
+          font-weight: normal; //
+          color: #9b8a76; /* 灰褐色 */
+          letter-spacing: 4px; /* 字母间距 */
+          margin: 0;
+      }
+      /* .author::after：在署名下方画一条红色短线，分隔题头与正文 */
+      .author::after {
+          content: "";//
+          display: block; //
+          width: 48px; /* 线条宽度 */
+          height: 2px; /* 线条高度 */
+          margin: 20px auto 0; /* 线条外边距 */
+          background: #b8563f; /* 线条背景色 */
+          border-radius: 1px; /* 线条圆角 */
+      }
+      /* .verse：诗句（类选择器），字号稍大、行距放宽，阅读更舒展 */
+      .verse {
+          font-size: 22px; /* 字号稍大 */
+          font-weight: bold; /* 加粗 */
+          line-height: 2.2; /* 行距放宽 */
+          letter-spacing: 2px; /* 字母间距 */
+          margin: 32px 0 0; /* 上下外边距 */
+          text-shadow: 1px 1px 2px rgba(61, 50, 41, 0.15); /* 文字阴影 */
+      }
+      /* .verse br：后代选择器，选中诗句内部的换行标签；br 是空标签，自身没有文字，要控制行距应写在 .verse 上 */
+      .verse br {
+          line-height: 20px; /* 行距 */
+          color:red; /* 红色 */
+      }
+      /* p：所有段落的通用样式，深墨色文字；类选择器优先级高于标签选择器，所以 .author/.verse 会覆盖这里的样式 */
+      p {
+          font-size: 20px; /* 字号 */
+          line-height: 2; /* 行距 */
+          color: #3d3229; /* 深墨色 */
+          margin: 0; /* 上下外边距 */
+          text-shadow: 1px 1px 2px rgba(61, 50, 41, 0.15); /* 文字阴影 */
+      }
+      /* h1：标题样式，深墨色、大字号并拉开字距，更有古风感 */
+      h1 {
+          font-size: 36px; /* 大字号 */
+          letter-spacing: 8px; /* 字母间距 */
+          color: #3a2e25; /* 深墨色 */
+          margin: 0;
+          text-shadow: 2px 3px 6px rgba(58, 46, 37, 0.15); /* 文字阴影 */
+      }
+  </style>
+</head>
+<!-- body：页面可见内容区，展示给用户的内容都写在这里 -->
+<body>
+<!-- .poem-card：把所有内容包进一张居中的卡片，统一留白与背景 -->
+<div class="poem-card">
+    <!-- 标题：诗名 -->
+    <h1>静夜思</h1>
+    <!-- 作者署名：p 标签套用 .author 类 -->
+    <p class="author">唐 · 李白</p>
+    <!-- 第一段诗句：外层用 div 包裹，内部 p 套用 .verse 类，br 标签负责句内换行 -->
+    <div>
+        <p class="verse">
+            床前明月光，疑是地上霜。<br>
+            举头望明月，低头思故乡。
+        </p>
+    </div>
+    <!-- 第二段诗句：内容与上方相同，只是不用 div 包裹，直接使用 .verse 类 -->
+    <p class="verse">
+        床前明月光，疑是地上霜。<br>
+        举头望明月，低头思故乡。
+    </p>
+</div>
+</body>
+</html>

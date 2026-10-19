@@ -1,0 +1,183 @@
+<!-- HTML5 文档类型声明 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>家乡特色水果</title>
+    <!-- 页内样式表 -->
+    <style>
+        /* 页面整体：flex 弹性布局，让盒子在浏览器中居中，铺暖色果香背景 */
+        body {
+            margin: 0;
+            padding: 40px 16px;
+            box-sizing: border-box;
+            min-height: 100vh; /* 至少铺满一屏，盒子才能全屏居中 */
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+            background: linear-gradient(160deg, #fff6ec 0%, #ffe7d2 100%); /* 暖色渐变 */
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+        }
+        /* ==================== 大盒子：所有内容都装进这个盒子 ==================== */
+        .box {
+            width: 920px;
+            max-width: 100%;
+            box-sizing: border-box;
+            padding: 44px 48px 40px;
+            background: #fffdfa; /* 暖白色 */
+            border: 1px solid #f3e3d3; /* 浅暖色边框 */
+            border-radius: 22px; /* 大圆角 */
+            box-shadow: 0 18px 44px rgba(150, 92, 58, 0.16); /* 柔和投影 */
+            text-align: center;
+        }
+        /* 标题 */
+        .box h1 {
+            margin: 0;
+            font-size: 34px;
+            letter-spacing: 8px; /* 拉开字距 */
+            text-indent: 8px; /* 补偿字距偏移，保持视觉居中 */
+            color: #b23a2e; /* 果红色 */
+        }
+        /* .box h1::after：标题下方渐变色装饰线 */
+        .box h1::after {
+            content: "";
+            display: block;
+            width: 96px;
+            height: 3px;
+            margin: 16px auto 0;
+            background: linear-gradient(90deg, #e8b04b, #b23a2e); /* 黄到红的渐变 */
+            border-radius: 2px;
+        }
+        /* 副标题 */
+        .sub {
+            margin: 14px 0 34px;
+            font-size: 15px;
+            letter-spacing: 5px;
+            text-indent: 5px;
+            color: #a4886f;
+        }
+        /* ==================== 三张水果卡片 ==================== */
+        .fruits {
+            display: flex; /* 卡片横向排列 */
+            flex-wrap: wrap; /* 窄屏自动换行 */
+            gap: 22px; /* 卡片之间的间距 */
+            margin: 0;
+            padding: 0;
+            list-style: none; /* 去掉列表小圆点 */
+        }
+        .fruit {
+            flex: 1; /* 三张卡片等宽 */
+            min-width: 210px;
+            box-sizing: border-box;
+            padding: 28px 20px 24px;
+            background: #fff9f2;
+            border: 1px solid #f2e2d0;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(150, 92, 58, 0.08);
+            transition: all 0.25s; /* 过渡动画：悬停时变化更顺滑 */
+        }
+        /* .fruit:hover：鼠标悬停时卡片上浮、阴影加深 */
+        .fruit:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 34px rgba(150, 92, 58, 0.2);
+        }
+        .fruit h2 {
+            margin: 14px 0 8px;
+            font-size: 19px;
+            color: #7a4a2b; /* 焦糖棕 */
+        }
+        .fruit p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.9;
+            color: #8a7563;
+            text-align: left; /* 正文左对齐，阅读舒适 */
+        }
+        /* 图标圆形底：每张卡片一种浅色 */
+        .icon {
+            width: 96px;
+            height: 96px;
+            margin: 0 auto;
+            display: flex; /* 让 SVG 图标在圆内居中 */
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
+        .icon-cherry { background: radial-gradient(circle at 35% 30%, #ffe4e0, #ffd0c9); }
+        .icon-apple { background: radial-gradient(circle at 35% 30%, #ffe9d6, #ffd8b0); }
+        .icon-pear { background: radial-gradient(circle at 35% 30%, #fff3cc, #ffe9a3); }
+        /* 结语 */
+        .tip {
+            margin: 34px 0 0;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: #b09a85;
+        }
+        .tip::before { content: "—— "; }
+        .tip::after { content: " ——"; }
+    </style>
+</head>
+<body>
+<!-- .box：整页唯一的大盒子，所有内容都放在盒子里 -->
+<div class="box">
+    <h1>家乡特色水果</h1>
+    <p class="sub">乌蒙高原 · 四季鲜甜</p>
+    <ul class="fruits">
+        <!-- 卡片一：纳雍玛瑙红樱桃 -->
+        <li class="fruit">
+            <div class="icon icon-cherry">
+                <!-- 手绘樱桃图标 -->
+                <svg viewBox="0 0 64 64" width="56" height="56">
+                    <path d="M32 14 Q24 28 20 38" stroke="#8a6a3f" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+                    <path d="M32 14 Q40 28 44 38" stroke="#8a6a3f" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+                    <path d="M32 14 Q40 6 50 10 Q44 20 32 14 Z" fill="#63ab57"/>
+                    <circle cx="19" cy="45" r="12" fill="#d63a2f"/>
+                    <circle cx="16" cy="41" r="4" fill="#ffffff" opacity="0.45"/>
+                    <circle cx="45" cy="45" r="12" fill="#bf2d22"/>
+                    <circle cx="42" cy="41" r="4" fill="#ffffff" opacity="0.4"/>
+                </svg>
+            </div>
+            <h2>纳雍玛瑙红樱桃</h2>
+            <p>纳雍县特产、中国地理标志产品。果实椭圆饱满，皮色紫红如玛瑙，果肉细嫩多汁、酸甜适中，每年四五月最先带来山野的鲜甜。</p>
+        </li>
+        <!-- 卡片二：威宁苹果 -->
+        <li class="fruit">
+            <div class="icon icon-apple">
+                <!-- 手绘苹果图标 -->
+                <svg viewBox="0 0 64 64" width="56" height="56">
+                    <rect x="30" y="8" width="4" height="12" rx="2" fill="#8a6a3f"/>
+                    <path d="M34 12 Q42 4 52 8 Q46 18 34 12 Z" fill="#63ab57"/>
+                    <path d="M32 22 C24 14 12 18 12 32 C12 46 22 56 32 56 C42 56 52 46 52 32 C52 18 40 14 32 22 Z" fill="#e0503f"/>
+                    <ellipse cx="23" cy="32" rx="5" ry="7" fill="#ffffff" opacity="0.35"/>
+                </svg>
+            </div>
+            <h2>威宁苹果</h2>
+            <p>产自海拔两千余米的威宁高原，日照充足、昼夜温差大，糖分积累充分，果面红艳光亮、肉质脆嫩清甜，是国家地理标志保护产品。</p>
+        </li>
+        <!-- 卡片三：毕节刺梨 -->
+        <li class="fruit">
+            <div class="icon icon-pear">
+                <!-- 手绘刺梨图标 -->
+                <svg viewBox="0 0 64 64" width="56" height="56">
+                    <circle cx="32" cy="38" r="18" fill="#f2b420"/>
+                    <path d="M32 12 L36 22 L28 22 Z" fill="#8a6a1d"/>
+                    <path d="M22 16 L30 24 L21 26 Z" fill="#8a6a1d"/>
+                    <path d="M42 16 L34 24 L43 26 Z" fill="#8a6a1d"/>
+                    <circle cx="24" cy="30" r="1.7" fill="#c98d10"/>
+                    <circle cx="40" cy="30" r="1.7" fill="#c98d10"/>
+                    <circle cx="32" cy="26" r="1.7" fill="#c98d10"/>
+                    <circle cx="20" cy="40" r="1.7" fill="#c98d10"/>
+                    <circle cx="44" cy="40" r="1.7" fill="#c98d10"/>
+                    <circle cx="27" cy="50" r="1.7" fill="#c98d10"/>
+                    <circle cx="38" cy="49" r="1.7" fill="#c98d10"/>
+                    <circle cx="24" cy="32" r="4.5" fill="#ffffff" opacity="0.4"/>
+                </svg>
+            </div>
+            <h2>毕节刺梨</h2>
+            <p>乌蒙山区特色野果，人称“维C之王”，每百克果肉维生素C含量可达两千毫克以上，约为猕猴桃的十倍，鲜食、榨汁、泡酒皆宜。</p>
+        </li>
+    </ul>
+    <p class="tip">云雾滋养的高原山果，一口尝尽乌蒙四季</p>
+</div>
+</body>
+</html>

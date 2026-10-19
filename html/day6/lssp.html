@@ -1,0 +1,96 @@
+<!-- HTML5 文档类型声明 -->
+<!DOCTYPE html>
+<!-- lang="zh-CN"：声明本页语言为简体中文 -->
+<html lang="zh-CN">
+<head>
+    <!-- 字符编码 UTF-8，避免中文乱码 -->
+    <meta charset="UTF-8">
+    <!-- 浏览器标签页标题 -->
+    <title>绿色食品</title>
+    <!-- 页内样式表 -->
+    <style>
+        /* 页面整体：弹性布局，让盒子在浏览器中居中显示 */
+        body {
+            margin: 0; /* 清除默认外边距 */
+            padding: 36px 16px; /* 四周留白，避免盒子紧贴窗口边缘 */
+            box-sizing: border-box; /* 内边距计入元素宽度 */
+            min-height: 100vh; /* 页面至少铺满一屏 */
+            display: flex; /* 开启弹性布局 */
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+            background: linear-gradient(160deg, #f4faf0 0%, #dff0da 100%); /* 浅绿渐变背景 */
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+        }
+        /* ==================== 大盒子：所有内容都装进这个盒子 ==================== */
+        .box {
+            width: 800px; /* 盒子宽度 */
+            max-width: 100%; /* 小屏时不超过屏幕宽 */
+            background: #ffffff; /* 白色底 */
+            border: 1px solid #cde5cd; /* 浅绿细边框 */
+            border-radius: 16px; /* 圆角 */
+            overflow: hidden; /* 裁掉超出圆角的部分，上下图块贴合圆角 */
+            box-shadow: 0 14px 36px rgba(46, 125, 50, 0.18); /* 柔和绿色投影 */
+        }
+        /* ==================== 盒子上面、下面两张背景图像 ==================== */
+        /* 两块图像区域共用样式 */
+        .box-img {
+            height: 150px; /* 图块高度 */
+            background-repeat: no-repeat; /* 背景图像不平铺 */
+            background-position: center; /* 背景图像居中显示 */
+            background-size: cover; /* 背景图像等比缩放铺满整块区域 */
+        }
+        /* 盒子上面的一张背景图像 */
+        .top-img {
+            background-image: url("./img/lssp-top.svg");
+        }
+        /* 盒子下面的一张背景图像 */
+        .bottom-img {
+            background-image: url("./img/lssp-bottom.svg");
+        }
+        /* ==================== 盒子中间的文字内容 ==================== */
+        .content {
+            padding: 30px 46px 34px; /* 文字区四周留白 */
+            text-align: center; /* 标题、标语居中 */
+        }
+        .content h1 {
+            margin: 0; /* 清除默认外边距 */
+            font-size: 34px; /* 大字号 */
+            letter-spacing: 10px; /* 拉开字距 */
+            text-indent: 10px; /* 补偿字距的偏移，保持视觉居中 */
+            color: #2e7d32; /* 主题深绿色 */
+        }
+        .content .slogan {
+            margin: 10px 0 24px; /* 与标题、正文拉开距离 */
+            font-size: 15px; /* 小字号 */
+            letter-spacing: 6px; /* 字距 */
+            text-indent: 6px;
+            color: #7fa885; /* 浅绿色 */
+        }
+        .content p.text {
+            margin: 0 0 14px; /* 段间距 */
+            font-size: 16px; /* 字号 */
+            line-height: 2; /* 行高 */
+            color: #43524a; /* 深灰绿文字 */
+            text-align: justify; /* 两端对齐 */
+            text-indent: 2em; /* 首行缩进两个字符 */
+        }
+    </style>
+</head>
+<body>
+<!-- .box：整页唯一的大盒子，所有内容都放在盒子里 -->
+<div class="box">
+    <!-- 盒子上面：一张背景图像 -->
+    <div class="box-img top-img"></div>
+    <!-- 盒子中间：文字内容 -->
+    <div class="content">
+        <h1>绿色食品</h1>
+        <p class="slogan">源自自然 · 守护健康</p>
+        <p class="text">绿色食品是指产自优良生态环境、按照绿色食品标准生产、实行全程质量控制，并获得绿色食品标志使用权的安全、优质农产品及相关产品。因其出自纯净、良好的生态环境，带给人们健康的生命活力，故名为“绿色食品”。</p>
+        <p class="text">绿色食品标志由太阳、叶片和蓓蕾三部分组成，寓意保护生态环境、给人们带来蓬勃生机。绿色食品分为A级和AA级两个等级：A级允许限量使用限定的化学合成物质，AA级则完全采用有机生产方式。</p>
+        <p class="text">绿色食品坚持“从土地到餐桌”的全程质量控制理念，倡导人与自然和谐共生。餐桌上多一份绿色，生活里多一份健康，选择绿色食品，既是守护自身健康，也是对生态环境的一份关爱。</p>
+    </div>
+    <!-- 盒子下面：一张背景图像 -->
+    <div class="box-img bottom-img"></div>
+</div>
+</body>
+</html>

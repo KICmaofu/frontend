@@ -1,0 +1,101 @@
+<!-- HTML5 文档类型声明：告诉浏览器按标准模式渲染本页 -->
+<!DOCTYPE html>
+<!-- html：根元素；lang="zh-CN" 声明本页语言为简体中文，利于浏览器和屏幕阅读器正确识别 -->
+<html lang="zh-CN">
+<!-- head：页面配置区，放置字符集、标题、样式等信息，内容不会直接显示在页面上 -->
+<head>
+    <!-- 声明字符编码为 UTF-8，避免中文乱码 -->
+    <meta charset="UTF-8">
+    <!-- 浏览器标签页上显示的标题 -->
+    <title>学院简介 - 毕节职业技术学院</title>
+    <!-- style：页内样式表，用 CSS 描述整个页面的外观 -->
+    <style>
+        /* 页面整体：清掉默认外边距、铺上浅蓝灰渐变背景，作为大盒子的“底纸” */
+        body {
+            margin: 0; /* 清除浏览器默认的页面外边距 */
+            padding: 40px 16px; /* 上下 40px、左右 16px 的留白，避免盒子紧贴屏幕边缘 */
+            box-sizing: border-box; /* 让内边距计入元素宽度，宽高的计算更直观 */
+            background: linear-gradient(160deg, #eef2f8 0%, #dfe7f1 100%); /* 浅蓝灰渐变背景 */
+            font-family: "FangSong", "STFangsong", "仿宋", serif; /* 全页兜底字体：仿宋（缺失字符回退衬线体） */
+        }
+        /* ==================== 大盒子：所有内容都装进这个盒子 ==================== */
+        .intro-box {
+            width: 960px; /* 盒子固定宽度 */
+            max-width: 100%; /* 小屏时不超过屏幕宽度，避免溢出 */
+            margin: 0 auto; /* auto 左右外边距：整个盒子在页面中水平居中显示 */
+            padding: 40px 48px; /* 内边距：内容与盒子边缘之间的留白 */
+            box-sizing: border-box; /* 让内边距、边框计入盒子宽度 */
+            background: #ffffff; /* 盒子白色背景 */
+            border: 1px solid #d9e1ec; /* 细实线边框 */
+            border-radius: 14px; /* 圆角 */
+            box-shadow: 0 12px 32px rgba(31, 58, 95, 0.12); /* 柔和投影，让盒子从背景中“浮”起来 */
+            text-align: center; /* 盒内所有内容水平居中显示 */
+            overflow: hidden; /* 形成 BFC：把浮动图片“包”进盒子，同时撑起盒子高度 */
+        }
+        /* 盒子内的大标题 */
+        .intro-box h1 {
+            margin: 0 0 30px; /* 与下方内容拉开 30px 距离 */
+            font-size: 34px; /* 大字号 */
+            letter-spacing: 6px; /* 拉开字距，标题更舒展 */
+            text-indent: 6px; /* 补偿字距把整体右推的位移，保持视觉居中 */
+            color: #17375e; /* 藏青色 */
+        }
+        /* .intro-box h1::after：标题下方的装饰短线，用伪元素画出来 */
+        .intro-box h1::after {
+            content: ""; /* 伪元素必须写 content，空字符串表示绘制一个空盒子 */
+            display: block; /* 变成块级元素，才能独占一行 */
+            width: 120px; /* 线条宽度 */
+            height: 3px; /* 线条高度 */
+            margin: 16px auto 0; /* auto 让短线水平居中 */
+            background: #b23a2e; /* 朱红色 */
+            border-radius: 2px; /* 圆角 */
+        }
+        /* ==================== 学院图片：浮动在页面左边 ==================== */
+        .intro-img {
+            float: left; /* 让图片向左浮动，后面的文字会环绕到它的右侧 */
+            width: 360px; /* 图片宽度 */
+            margin: 6px 28px 14px 0; /* 右侧留 28px 与文字隔开，下侧留 14px 与后续内容隔开 */
+            border-radius: 10px; /* 圆角 */
+            box-shadow: 0 10px 24px rgba(31, 58, 95, 0.25); /* 图片自己的投影 */
+        }
+        /* ==================== 学院介绍文字 ==================== */
+        .intro-box p {
+            margin: 0 0 18px; /* 段与段之间留出间距 */
+            font-family: "FangSong", "STFangsong", "仿宋", serif; /* 字体：仿宋 */
+            font-size: 18px; /* 字号 */
+            font-weight: bold; /* 字体加粗 */
+            line-height: 2; /* 行高：两倍行距，长段落阅读更舒展 */
+            color: #33415c; /* 字体颜色：深灰蓝 */
+            text-align: center; /* 文字居中显示 */
+        }
+        /* .source：页面末尾的来源小字（不算介绍文字，单独调小字号） */
+        .intro-box .source {
+            margin: 26px 0 0; /* 与上方正文拉开距离 */
+            font-size: 14px; /* 小字号 */
+            font-weight: normal; /* 取消加粗，弱化显示 */
+            color: #8a94a6; /* 浅灰蓝 */
+            line-height: 1.8; /* 行高 */
+        }
+        /* .source a：来源链接，跟随朱红色点缀 */
+        .intro-box .source a {
+            color: #b23a2e; /* 朱红色 */
+        }
+    </style>
+</head>
+<!-- body：页面可见内容区，展示给用户的内容都写在这里 -->
+<body>
+<!-- .intro-box：整页唯一的大盒子，所有内容都装在盒子里 -->
+<div class="intro-box">
+    <!-- 标题：学院简介 -->
+    <h1>学院简介</h1>
+    <!-- 学院图片：float: left 让它浮动到盒子内容的左边，文字环绕在图片右侧 -->
+    <img class="intro-img" src="./img/campus-panorama.jpg" alt="毕节职业技术学院校园全景">
+    <!-- 介绍文字：仿宋、加粗、居中，环绕在图片右侧 -->
+    <p>毕节职业技术学院于2008年2月经贵州省人民政府批准组建，办学历史可追溯至1956年创办的毕节农业学校。学校占地面积740亩，建筑面积30多万平方米，是贵州省第一批和第二批“双高计划”建设单位。</p>
+    <p>学校设置农业工程系、工矿建筑系、电子信息工程系、财政经济系、旅游管理系、教育科学系、医学护理系等7个二级院系，开设高职专业30个，在校生1万余人，现有专任教师580多人。先后被授予国家级高技能人才培训基地、全国急救教育试点、黄炎培职业教育奖“杰出校长奖”、省级东西部协作示范校等荣誉称号。</p>
+    <p>学校始终坚持“立德树人、以文化人”的办学理念，践行“知行合一、自信创新”校训，与广州港集团、小米通讯、京东等20多家头部企业累计创办订单班60多个。学生在国家级、省级职业院校技能大赛中斩获奖项350余项，近五年毕业生去向落实率保持在95%以上，正朝着建设区域性、综合性、特色化高水平职业院校的目标稳步迈进。</p>
+    <!-- 来源说明：小字弱化显示 -->
+    <p class="source">文字与图片来源：<a href="https://www.gzbjzy.edu.cn/xygk/xyjj.htm">学院官网 · 学院简介</a></p>
+</div>
+</body>
+</html>
