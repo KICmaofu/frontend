@@ -6,7 +6,7 @@ import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash'
 import json from 'react-syntax-highlighter/dist/esm/languages/prism/json'
 import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx'
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import { usePrefersDark } from '../hooks/usePrefersDark'
+import { useIsDark } from '../hooks/useTheme'
 import demoMarkdown from './markdown-demo.md?raw'
 
 // ── Markdown 渲染与代码高亮 ─────────────────────────────────
@@ -24,8 +24,8 @@ SyntaxHighlighter.registerLanguage('bash', bash)
 // ── 共享组件: Markdown 渲染器(含代码高亮) ───────────────────
 
 function MarkdownView({ markdown }: { markdown: string }) {
-  // 高亮主题跟随系统深色模式: 与全站配色在同一套媒体查询下切换
-  const dark = usePrefersDark()
+  // 代码高亮主题跟随全站最终深浅色: 手动切换或跟随系统都能同步
+  const dark = useIsDark()
 
   return (
     <div className="learn-md-panel">

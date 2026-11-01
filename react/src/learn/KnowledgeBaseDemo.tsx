@@ -18,8 +18,7 @@ import type { TableColumnsType } from 'antd'
 import { FileTextOutlined } from '@ant-design/icons'
 import { fetchDocuments, removeDocument } from '../api/knowledge'
 import type { KnowledgeDocument } from '../api/knowledge'
-import FileDropzone from '../components/FileDropzone'
-import UploadTaskList from '../components/UploadTaskList'
+import BatchUploader from '../components/BatchUploader'
 import { useUploadQueue } from '../hooks/useUploadQueue'
 import { formatBytes, formatDateTime } from '../utils/format'
 
@@ -28,8 +27,9 @@ import { formatBytes, formatDateTime } from '../utils/format'
 // 数据全部来自 mock 接口(/api/knowledge/*), 走 request.ts 的统一封装
 //
 // 拆出去的通用组件与逻辑:
+//   src/components/BatchUploader.tsx   批量上传面板(选择区 + 总进度 + 单文件进度)
 //   src/components/FileDropzone.tsx    选择/拖拽文件
-//   src/components/UploadTaskList.tsx  文件上传进度条组件(纯展示)
+//   src/components/UploadTaskList.tsx  单文件进度条与取消/重试(纯展示)
 //   src/hooks/useUploadQueue.ts        上传任务状态 + 取消/重试
 //
 // 演示彩蛋:
@@ -215,17 +215,16 @@ function KnowledgeBaseDemo() {
         </Col>
       </Row>
 
-      <h3>2. 上传文档: 拖拽/点选 → 上传任务队列</h3>
+      <h3>2. 批量上传: 拖拽/多选 → 总进度 + 单文件进度</h3>
       <p className="learn-kb-tip">
-        新任务会自动开始上传, 可随时取消、失败后重试。演示彩蛋: 文件名包含"错误"二字会失败;
-        上传成功后文档先显示"解析中", 约 3 秒后变为"可用"。
+        新任务会自动开始上传, 顶部总进度按文件大小加权; 每个文件各自显示进度, 可随时取消,
+        失败后重试。演示彩蛋: 文件名包含"错误"二字会失败; 上传成功后文档先显示"解析中",
+        约 3 秒后变为"可用"。
       </p>
-      <FileDropzone
-        onFiles={handleFiles}
-        hint={`支持多选; 单个文件不超过 ${MAX_FILE_SIZE_MB} MB`}
-      />
-      <UploadTaskList
+      <BatchUploader
         tasks={tasks}
+        hint={`支持多选; 单个文件不超过 ${MAX_FILE_SIZE_MB} MB`}
+        onFiles={handleFiles}
         onCancel={cancelTask}
         onRetry={retryTask}
         onRemove={removeTask}

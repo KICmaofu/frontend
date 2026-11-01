@@ -13,6 +13,26 @@
   margin: 0 0 8px;
 }
 
+/* 页面头部: 标题在左, 主题切换 + 窄屏菜单按钮在右 */
+.learn-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* min-width: 0 允许副标题换行收缩, 不把右侧按钮挤出屏幕 */
+.learn-header-text {
+  min-width: 0;
+}
+
+.learn-header-actions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+}
+
 .learn-subtitle {
   margin-bottom: 24px;
 }
@@ -47,6 +67,46 @@
   color: var(--accent);
   background: var(--accent-bg);
   border-color: var(--accent-border);
+}
+
+/* 窄屏菜单按钮: 默认隐藏, 768px 以下显示(见文件末尾的移动端适配) */
+.learn-nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text-h);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.learn-nav-toggle:hover {
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+.learn-nav-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* 抽屉里的竖排导航: 去掉横向版本的底边框, 每项撑满一行方便点按 */
+.learn-nav-vertical {
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.learn-nav-vertical .learn-nav-link {
+  padding: 10px 12px;
+  font-size: 15px;
+  text-align: left;
 }
 
 .learn-demo {
@@ -541,6 +601,66 @@
   opacity: 0.75;
 }
 
+/* 批量上传面板: 选择区 + 总进度 + 单文件列表 */
+.learn-kb-uploader {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 总进度汇总卡片 */
+.learn-kb-batch {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--social-bg);
+}
+
+.learn-kb-batch-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--text-h);
+  font-size: 14px;
+}
+
+.learn-kb-batch-percent {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* 总进度条比单文件进度更粗, 视觉层级更明显 */
+.learn-kb-batch-progress {
+  height: 10px;
+}
+
+/* 已完成 / 上传中 / 失败 / 总大小等汇总信息 */
+.learn-kb-batch-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  opacity: 0.85;
+}
+
+.learn-kb-batch-meta strong {
+  color: var(--text-h);
+  font-weight: 600;
+}
+
+/* 总进度卡片里的任务列表: 高度收一点, 避免整块过长 */
+.learn-kb-batch .learn-kb-tasks {
+  max-height: 280px;
+}
+
 /* 上传任务列表: 任务多时区域内部滚动, 不拉长页面 */
 .learn-kb-tasks {
   display: flex;
@@ -670,4 +790,1097 @@
 
 .learn-kb-doc-icon {
   color: var(--accent);
+}
+
+/* ── 会话列表示例 ────────────────────────────────────────── */
+
+/* 两栏布局: 左会话列表 + 右当前会话详情; 小屏改为上下排列 */
+.learn-chat-shell {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
+}
+
+.learn-chat-sessions,
+.learn-chat-main {
+  display: flex;
+  flex-direction: column;
+  min-height: 380px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--social-bg);
+  overflow: hidden;
+  text-align: left;
+}
+
+/* 侧栏顶栏: 标题 + 新建按钮 */
+.learn-chat-sessions-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.learn-chat-sessions-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+/* 列表区域: 会话多时内部滚动; 选择器加前缀, 覆盖 .learn-demo ul 的默认缩进 */
+.learn-chat-sessions .learn-chat-session-list {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  overflow-y: auto;
+  background: var(--bg);
+}
+
+.learn-chat-session-list li {
+  gap: 0;
+}
+
+/* 加载中 / 空状态: 占满列表区域并居中 */
+.learn-chat-list-status {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 12px;
+  background: var(--bg);
+}
+
+/* 单条会话: 一行 = 选中区(标题 + 元信息) + 更多操作 */
+.learn-chat-session {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+
+.learn-chat-session:hover {
+  background: var(--social-bg);
+}
+
+.learn-chat-session.active {
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
+}
+
+.learn-chat-session-main {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.learn-chat-session-main:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  border-radius: 6px;
+}
+
+.learn-chat-session-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  color: var(--text-h);
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.learn-chat-session-title .anticon {
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.learn-chat-session-meta {
+  overflow: hidden;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 12px;
+  opacity: 0.75;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* "..." 按钮: 平时隐藏, 悬停/选中/键盘聚焦时出现 */
+.learn-chat-session-more {
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.learn-chat-session:hover .learn-chat-session-more,
+.learn-chat-session:focus-within .learn-chat-session-more,
+.learn-chat-session.active .learn-chat-session-more {
+  opacity: 1;
+}
+
+/* 触屏设备没有悬停: 始终显示操作按钮 */
+@media (hover: none) {
+  .learn-chat-session-more {
+    opacity: 1;
+  }
+}
+
+/* 行内重命名输入框: 撑满整行, 留出与普通行一致的内边距 */
+.learn-chat-session .learn-chat-rename-input {
+  flex: 1;
+  margin: 6px 8px;
+}
+
+/* 右侧当前会话: 头部标题 + 主体内容 */
+.learn-chat-main-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.learn-chat-main-head h4 {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--text-h);
+  font-size: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 头部标题 + 副信息: 纵向排列, 超长标题省略 */
+.learn-chat-main-title {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.learn-chat-main-sub {
+  overflow: hidden;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 12px;
+  opacity: 0.75;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.learn-chat-main-head .ant-tag {
+  flex-shrink: 0;
+}
+
+/* 未选中会话时: 空状态占满右侧面板 */
+.learn-chat-empty {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+}
+
+/* ── 消息区与快捷操作 ────────────────────────────────────── */
+
+/* 消息多时内部滚动 */
+.learn-chat-messages {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  overflow-y: auto;
+  background: var(--bg);
+}
+
+/* 加载中 / 空状态: 占满消息区并居中 */
+.learn-chat-msg-status {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--bg);
+}
+
+/* 单条消息: 头像 + 内容列; 用户消息整体反向排列 */
+.learn-chat-msg {
+  display: flex;
+  gap: 10px;
+}
+
+.learn-chat-msg.user {
+  flex-direction: row-reverse;
+}
+
+.learn-chat-msg-avatar {
+  flex-shrink: 0;
+  margin-top: 21px;
+}
+
+.learn-chat-msg-avatar.user {
+  background: var(--accent);
+}
+
+.learn-chat-msg-avatar.assistant {
+  background: #10b981;
+}
+
+.learn-chat-msg-main {
+  display: flex;
+  min-width: 0;
+  max-width: 78%;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.learn-chat-msg.user .learn-chat-msg-main {
+  align-items: flex-end;
+}
+
+/* 角色名 + 时间 */
+.learn-chat-msg-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+/* 气泡: 保留消息里的换行 */
+.learn-chat-msg-bubble {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--social-bg);
+  color: var(--text-h);
+  font-size: 14px;
+  line-height: 1.7;
+  text-align: left;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.learn-chat-msg.user .learn-chat-msg-bubble {
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+}
+
+/* 快捷操作: 平时隐藏, 悬停 / 键盘聚焦 / 请求进行中时出现 */
+.learn-chat-msg-actions {
+  display: flex;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.learn-chat-msg:hover .learn-chat-msg-actions,
+.learn-chat-msg:focus-within .learn-chat-msg-actions,
+.learn-chat-msg.busy .learn-chat-msg-actions {
+  opacity: 1;
+}
+
+/* 触屏设备没有悬停: 始终显示操作按钮 */
+@media (hover: none) {
+  .learn-chat-msg-actions {
+    opacity: 1;
+  }
+}
+
+/* 列表上方的交互说明 */
+.learn-chat-tip {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* ── 消息输入框: 多行输入 / 快捷键发送 / 输入联想 ──────────── */
+
+/* 输入区固定在会话底部; position: relative 给联想面板做定位参照 */
+.learn-chat-composer {
+  position: relative;
+  padding: 10px 12px 12px;
+  border-top: 1px solid var(--border);
+  background: var(--social-bg);
+}
+
+.learn-chat-composer-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 输入框内容沿用 Ant Design 的样式: 覆盖 .learn-demo 给原生 textarea 的默认边框 */
+.learn-chat-composer textarea {
+  padding: 4px 11px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 14px;
+  resize: none;
+}
+
+/* 聚焦反馈交给 Ant Design 的外层边框, 不再叠加原生 textarea 的 outline */
+.learn-chat-composer textarea:focus-visible {
+  outline: none;
+}
+
+/* 底部工具条: 快捷键提示 + 字数 + 发送按钮 */
+.learn-chat-composer-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.learn-chat-composer-hint {
+  min-width: 0;
+  flex: 1;
+  color: var(--text);
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.learn-chat-composer-hint kbd {
+  padding: 1px 5px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.learn-chat-composer-count {
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* 联想面板: 绝对定位在输入区上方, 不挤动消息列表 */
+.learn-chat-suggest {
+  position: absolute;
+  right: 12px;
+  bottom: calc(100% - 2px);
+  left: 12px;
+  z-index: 10;
+  max-height: 240px;
+  padding: 4px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+}
+
+.learn-chat-suggest-head {
+  padding: 4px 8px;
+  color: var(--text);
+  font-size: 12px;
+  opacity: 0.7;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 加前缀覆盖 .learn-demo ul / li 的默认缩进与横向排列 */
+.learn-chat-suggest .learn-chat-suggest-list {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.learn-chat-suggest .learn-chat-suggest-item {
+  display: block;
+  padding: 7px 8px;
+  border-radius: 6px;
+  color: var(--text-h);
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+  cursor: pointer;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.learn-chat-suggest .learn-chat-suggest-item:hover,
+.learn-chat-suggest .learn-chat-suggest-item.active {
+  background: var(--accent-bg);
+}
+
+/* 命中的关键字高亮: 去掉 mark 的默认黄底 */
+.learn-chat-suggest-item mark {
+  background: none;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.learn-chat-suggest-hint {
+  margin-top: 2px;
+  padding: 4px 8px;
+  border-top: 1px solid var(--border);
+  color: var(--text);
+  font-size: 11px;
+  opacity: 0.65;
+}
+
+@media (max-width: 1024px) {
+  .learn-chat-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .learn-chat-sessions,
+  .learn-chat-main {
+    min-height: 0;
+  }
+
+  .learn-chat-sessions .learn-chat-session-list {
+    max-height: 300px;
+  }
+
+  .learn-chat-messages {
+    max-height: 460px;
+  }
+}
+
+/* ── 移动端适配(手机竖屏) ───────────────────────────────────
+   1024px 断点只处理"两栏变一栏"这类结构变化;
+   768px 以下才是真正的手机布局: 导航换成抽屉、间距与字号收紧 */
+@media (max-width: 768px) {
+  .learn-page {
+    padding: 20px 14px 48px;
+  }
+
+  .learn-page h1 {
+    font-size: 26px;
+  }
+
+  .learn-subtitle {
+    margin-bottom: 18px;
+    font-size: 14px;
+  }
+
+  .learn-header {
+    align-items: center;
+  }
+
+  /* 横向导航让位给右侧抽屉, 菜单按钮出现 */
+  .learn-nav:not(.learn-nav-vertical) {
+    display: none;
+  }
+
+  .learn-nav-toggle {
+    display: inline-flex;
+  }
+
+  /* 输入控件统一 16px: iOS 上小于 16px 的输入框聚焦时会自动放大页面 */
+  .learn-demo input,
+  .learn-demo textarea,
+  .learn-demo select,
+  .learn-md-split textarea {
+    font-size: 16px;
+  }
+
+  .learn-card,
+  .learn-form {
+    padding: 12px;
+  }
+
+  /* 触摸目标加高, 降低点错概率 */
+  .learn-btn {
+    padding: 6px 12px;
+  }
+
+  /* 模拟顶栏内容多时允许换行, 不挤成一团 */
+  .learn-mock-header {
+    flex-wrap: wrap;
+  }
+
+  .learn-md-panel {
+    padding: 12px 14px;
+  }
+
+  /* 宽表格(Markdown GFM)改为面板内横向滚动, 不撑破页面 */
+  .learn-md-panel table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  /* 文档名不再限制 420px, 放不下时用省略号 */
+  .learn-kb-doc-name {
+    max-width: 100%;
+  }
+
+  /* 上传任务头部: 文件名独占一行, 大小/状态/操作排第二行 */
+  .learn-kb-task-head {
+    flex-wrap: wrap;
+  }
+
+  .learn-kb-task-name {
+    flex-basis: 100%;
+  }
+
+  /* 消息气泡多占一点宽度, 小屏阅读更舒服 */
+  .learn-chat-msg-main {
+    max-width: 88%;
+  }
+
+  .learn-chat-msg-bubble {
+    padding: 8px 12px;
+  }
+
+  /* 快捷键提示在手机上塞不下, 让位给字数与发送按钮 */
+  .learn-chat-composer-hint {
+    display: none;
+  }
+
+  .learn-chat-composer-count {
+    margin-left: auto;
+  }
+
+  /* 请求日志里的长 URL / 报错文案在窄屏上允许任意位置换行 */
+  .learn-log-text {
+    overflow-wrap: anywhere;
+  }
+
+  /* antd Table 的列宽固定: 外层容器横向滚动, 表格本体给一个最小宽度,
+     避免窄屏上列被压成一条缝 */
+  .learn-demo .ant-table-container {
+    overflow-x: auto;
+  }
+
+  .learn-demo .ant-table-container table {
+    min-width: 460px;
+  }
+}
+
+/* ── 知识库管理: 列表 / 表单 / 详情页 ────────────────────── */
+
+/* 页头: 标题(与说明)在左, 操作按钮在右; 窄屏自动换行 */
+.learn-kb-page-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.learn-kb-page-head h3 {
+  margin: 0;
+}
+
+.learn-kb-page-head .learn-kb-tip {
+  margin: 4px 0 0;
+}
+
+/* 列表中的名称链接: 图标 + 文字, 描述作为第二行弱化显示 */
+.learn-kb-base-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  font-size: 15px;
+}
+
+.learn-kb-base-desc {
+  display: block;
+  max-width: 420px;
+  margin-top: 2px;
+  overflow: hidden;
+  color: var(--text);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 表单页: 限制宽度, 与学习示例的卡片样式保持一致 */
+.learn-kb-form {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 560px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--social-bg);
+}
+
+/* 覆盖 .learn-demo 给原生 textarea 的样式, 让 TextArea 仍跟随 antd 主题 */
+.learn-kb-form textarea {
+  padding: 4px 11px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text-h);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* 加载态: 居中留白 */
+.learn-kb-loading {
+  display: flex;
+  justify-content: center;
+  padding: 56px 0;
+}
+
+/* 详情页的描述: 保留换行, 长文本允许任意位置换行 */
+.learn-kb-detail-desc {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* 文档列表页: 实时同步指示灯 + 工具栏汇总 */
+.learn-kb-sync {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.learn-kb-sync-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #16a34a;
+  opacity: 0.35;
+}
+
+/* 有文档解析中: 指示灯高亮并轻微呼吸, 提示页面正在自动更新 */
+.learn-kb-sync.live {
+  color: #16a34a;
+  opacity: 1;
+}
+
+.learn-kb-sync.live .learn-kb-sync-dot {
+  opacity: 1;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
+  animation: learn-kb-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes learn-kb-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.7);
+    opacity: 0.55;
+  }
+}
+
+/* 文档工具栏: 左侧筛选, 右侧数量汇总 */
+.learn-kb-doc-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.learn-kb-doc-summary {
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  opacity: 0.85;
+}
+
+@media (max-width: 768px) {
+  .learn-kb-base-desc {
+    max-width: 100%;
+  }
+
+  .learn-kb-form {
+    padding: 14px;
+  }
+}
+
+/* 更窄的旧手机(≤480px): 再收紧一档 */
+@media (max-width: 480px) {
+  .learn-page {
+    padding: 16px 12px 40px;
+  }
+
+  .learn-page h1 {
+    font-size: 23px;
+  }
+
+  .learn-chat-msg-main {
+    max-width: 92%;
+  }
+
+  /* 头像很占宽度, 小屏只留气泡(角色名仍显示在消息上方) */
+  .learn-chat-msg-avatar {
+    display: none;
+  }
+}
+
+/* ── 引用来源示例: 左回答 + 右原文 ────────────────────────── */
+
+/* 两栏布局: 左栏回答与来源, 右栏原文预览(sticky 吸顶) */
+.learn-cite-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 16px;
+  align-items: start;
+}
+
+/* 左栏卡片: 与学习示例的卡片保持同样的边框与底色 */
+.learn-cite-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--social-bg);
+}
+
+/* 问题行: 标签 + 问题文本 */
+.learn-cite-question {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--text-h);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.learn-cite-question .ant-tag {
+  flex-shrink: 0;
+  margin: 0;
+}
+
+/* 回答正文: 保留 mock 里的换行 */
+.learn-cite-answer-text {
+  margin: 0;
+  color: var(--text-h);
+  font-size: 15px;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* 回答里的引用编号: 圆形小按钮, 选中时反色 */
+.learn-cite-ref {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  margin: 0 2px;
+  border: 1px solid var(--accent-border);
+  border-radius: 999px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1;
+  vertical-align: 1px;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.learn-cite-ref:hover,
+.learn-cite-ref.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.learn-cite-divider {
+  height: 1px;
+  background: var(--border);
+}
+
+/* 来源列表标题行: 左标题右数量 */
+.learn-cite-sources-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.learn-cite-sources-head h4 {
+  margin: 0;
+  color: var(--text-h);
+  font-size: 15px;
+}
+
+.learn-cite-sources-count {
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+/* 来源列表: 去掉默认序号(序号由内部圆形索引展示) */
+.learn-cite-sources {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 单条来源: 整块可点击, 选中态用强调色描边 */
+.learn-cite-source {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.learn-cite-source:hover {
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+}
+
+.learn-cite-source.active {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+
+/* 来源序号: 圆形小徽标 */
+.learn-cite-source-index {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.learn-cite-source.active .learn-cite-source-index {
+  background: var(--accent);
+  color: #fff;
+}
+
+.learn-cite-source-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+/* 文档名 + 段落定位: 名称可换行, 定位不挤走 */
+.learn-cite-source-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--text-h);
+  font-size: 13.5px;
+}
+
+.learn-cite-source-locator {
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* 引用原文: 最多两行, 超出省略 */
+.learn-cite-source-quote {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--text);
+  font-size: 12.5px;
+  line-height: 1.6;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.learn-cite-source-action {
+  flex-shrink: 0;
+  align-self: center;
+  color: var(--accent);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* 右栏原文: 吸顶 + 自身滚动, 长文档也不会把页面撑得很高 */
+.learn-cite-viewer {
+  position: sticky;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 320px;
+  max-height: calc(100vh - 180px);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.learn-cite-viewer-head {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.learn-cite-viewer-icon {
+  color: var(--accent);
+}
+
+/* 文档名过长时省略, 标签保留完整可见 */
+.learn-cite-viewer-title {
+  flex: 1;
+  overflow: hidden;
+  color: var(--text-h);
+  font-size: 14px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.learn-cite-viewer-head .ant-tag {
+  flex-shrink: 0;
+  margin: 0;
+}
+
+/* 正文区: 独立滚动, 平滑滚动让定位过程可见 */
+.learn-cite-viewer-body {
+  flex: 1;
+  padding: 8px 18px 18px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.learn-cite-paragraph {
+  margin: 0;
+  padding: 8px 10px;
+  border-left: 3px solid transparent;
+  border-radius: 4px;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+/* 当前定位段落: 左侧竖线 + 浅色底 */
+.learn-cite-paragraph.active {
+  border-left-color: var(--accent);
+  background: var(--accent-bg);
+  color: var(--text-h);
+}
+
+/* 被引用的原文片段 */
+.learn-cite-mark {
+  padding: 0 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  color: #fff;
+}
+
+.learn-cite-viewer-empty {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 32px 20px;
+  color: var(--text);
+  font-size: 13px;
+  text-align: center;
+}
+
+.learn-cite-viewer-empty p {
+  margin: 0;
+}
+
+.learn-cite-viewer-empty .anticon {
+  color: var(--accent);
+  font-size: 28px;
+}
+
+.learn-cite-viewer-loading {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 0;
+}
+
+.learn-cite-ref:focus-visible,
+.learn-cite-source:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* 窄屏: 改为上下排列, 原文不再吸顶, 给一个固定高度 */
+@media (max-width: 1024px) {
+  .learn-cite-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .learn-cite-viewer {
+    position: static;
+    max-height: 460px;
+  }
 }

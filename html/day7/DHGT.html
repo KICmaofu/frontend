@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无序列表导航条</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background-color: #f5f5f5;
+            padding: 50px;
+        }
+
+        /* 用无序列表做导航条 */
+        .nav {
+            list-style: none;
+            overflow: hidden; /* 清除浮动 */
+            width: 750px;
+            margin: 0 auto;
+            background-color: #eef4fb;
+            border: 1px solid #c9dcf0;
+            border-radius: 6px;
+        }
+
+        .nav li {
+            float: left;
+            border-right: 1px solid #c9dcf0;
+        }
+
+        .nav li:last-child {
+            border-right: none;
+        }
+
+        /* 箭头图片作为每个导航项的图标 */
+        .nav a {
+            display: block;
+            padding: 0 18px 0 26px;
+            line-height: 42px;
+            font-size: 16px;
+            color: #2b6cb0;
+            text-decoration: none;
+            background: url("images/arror.jpg") no-repeat 10px center;
+            background-size: 10px 10px;
+        }
+
+        .nav a:hover {
+            background-color: #2b6cb0;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <ul class="nav">
+        <li><a href="index2.html">学院主页</a></li>
+        <li><a href="xueyuanjianjie.html">学院简介</a></li>
+        <li><a href="xinwen.html">学院新闻</a></li>
+        <li><a href="dzxzhuanye.html">专业介绍</a></li>
+        <li><a href="zhaosheng.html">招生就业</a></li>
+    </ul>
+</body>
+</html>

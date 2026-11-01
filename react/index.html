@@ -1,11 +1,38 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- viewport-fit=cover: 刘海屏/圆角屏上允许内容延伸到安全区 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- 移动端浏览器地址栏颜色: 初始亮色, 切主题时由 useSyncTheme 更新 -->
+    <meta name="theme-color" content="#ffffff" />
     <!-- 标题里的 VITE_APP_TITLE 占位符会被替换成 .env 中定义的变量值 -->
     <title>%VITE_APP_TITLE%</title>
+    <script>
+      // 首屏防闪(FOUC): 在 React 挂载前先按本地偏好定一次主题,
+      // 否则刷新时会先渲染亮色再跳到暗色。
+      // 存储格式由 zustand/persist 决定: {"state":{"mode":"dark"},"version":0};
+      // key 与 src/store/themeStore.ts 里的 THEME_STORAGE_KEY 保持一致
+      (function () {
+        try {
+          var saved = JSON.parse(localStorage.getItem('learn-theme') || '{}')
+          var mode = saved.state && saved.state.mode
+          var dark =
+            mode === 'dark' ||
+            ((!mode || mode === 'system') &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches)
+
+          document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+          document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
+          document
+            .querySelector('meta[name="theme-color"]')
+            .setAttribute('content', dark ? '#16171d' : '#ffffff')
+        } catch (error) {
+          // 隐私模式等拿不到 localStorage 的情况: 保持默认亮色, 不阻塞页面
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

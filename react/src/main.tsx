@@ -6,12 +6,13 @@ import zhCN from 'antd/locale/zh_CN'
 import './index.css'
 import App from './App.tsx'
 import { setGlobalMessage } from './api/request'
-import { usePrefersDark } from './hooks/usePrefersDark'
+import { useIsDark, useSyncTheme } from './hooks/useTheme'
 
 // ── Ant Design 接入(全局配置) ────────────────────────────────
 // <ConfigProvider> 是 antd 的全局配置入口, 放在应用最外层:
 //   locale: 组件内置文案切换为中文(分页、日期、表单校验提示等)
-//   theme:  主题算法跟随系统深浅色, 与 index.css 的 CSS 变量保持一致
+//   theme:  主题算法跟随最终深浅色(用户手选优先, 否则跟随系统),
+//           主色与 index.css 的 --accent 对齐, antd 与页面用同一套配色
 // <AntdApp> 提供 message / modal / notification 的"上下文版"实例:
 //   组件内用 AntdApp.useApp() 获取, 才会应用上面配置的主题和语言
 
@@ -26,12 +27,19 @@ function MessageBridge() {
 }
 
 function Root() {
-  const prefersDark = usePrefersDark()
+  // 最终深浅色: store 里是 light/dark/system, 这里合成一个布尔值
+  const isDark = useIsDark()
+  // 写 <html data-theme>: index.css 的整套 CSS 变量随之切换
+  useSyncTheme(isDark)
 
   return (
     <ConfigProvider
       locale={zhCN}
-      theme={{ algorithm: prefersDark ? theme.darkAlgorithm : theme.defaultAlgorithm }}
+      theme={{
+        algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm,
+        // 主色对齐 --accent: 亮色 #aa3bff / 深色 #c084fc
+        token: { colorPrimary: isDark ? '#c084fc' : '#aa3bff' },
+      }}
     >
       <AntdApp>
         <MessageBridge />

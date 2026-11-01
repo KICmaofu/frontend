@@ -14,6 +14,10 @@ import ZustandDemo from './learn/ZustandDemo'
 import TypeScriptDemo from './learn/TypeScriptDemo'
 import MarkdownDemo from './learn/MarkdownDemo'
 import KnowledgeBaseDemo from './learn/KnowledgeBaseDemo'
+import ChatSessionsDemo from './learn/ChatSessionsDemo'
+import KnowledgeBaseListPage from './pages/knowledge/KnowledgeBaseListPage'
+import KnowledgeDocumentListPage from './pages/knowledge/KnowledgeDocumentListPage'
+import KnowledgeCitationPage from './pages/knowledge/KnowledgeCitationPage'
 
 // ── 路由表: 路由与导航栏共用的"单一数据源" ────────────────────
 // App.tsx 用它批量生成 <Route>, Layout.tsx 用它批量生成导航 <NavLink>;
@@ -44,4 +48,8 @@ export const learnRoutes: LearnRoute[] = [
   { path: 'typescript', label: 'TypeScript 进阶', Component: TypeScriptDemo },
   { path: 'markdown', label: 'Markdown 渲染', Component: MarkdownDemo },
   { path: 'knowledge-base', label: '知识库原型', Component: KnowledgeBaseDemo },
+  { path: 'chat-sessions', label: '会话列表', Component: ChatSessionsDemo },
+  { path: 'knowledge-bases', label: '知识库管理', Component: KnowledgeBaseListPage },
+  { path: 'knowledge-documents', label: '文档列表', Component: KnowledgeDocumentListPage },
+  { path: 'citation-sources', label: '引用来源', Component: KnowledgeCitationPage },
 ]

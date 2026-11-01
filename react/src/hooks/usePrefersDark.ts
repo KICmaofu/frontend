@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 
-// 跟随系统深色模式: 与 index.css 里的 prefers-color-scheme 是同一个媒体查询,
-// 目的: 让 antd 组件的主题算法和页面 CSS 变量保持同步(系统切换时实时更新)
+// 读取系统深色偏好: 这里只有"系统怎么说", 不包含用户的手动选择;
+// 最终深浅色由 useTheme 里的 useIsDark 合成(手选优先, 否则看 system),
+// 这样 antd 主题、代码高亮主题和页面 CSS 变量始终同步
 export function usePrefersDark(): boolean {
   const [dark, setDark] = useState(
     () => window.matchMedia('(prefers-color-scheme: dark)').matches,

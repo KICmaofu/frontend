@@ -17,7 +17,8 @@
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
-  color-scheme: light dark;
+  /* 亮色为默认; color-scheme 让滚动条、原生控件也用亮色 */
+  color-scheme: light;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -30,24 +31,30 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+/* ── 深色主题 ─────────────────────────────────────────────────
+   整站配色只看 <html data-theme>:
+   三种模式(system/light/dark)在 useIsDark 里已合成为具体结果,
+   再用 useSyncTheme 写到 data-theme 上。
+   刻意不写 @media (prefers-color-scheme: dark): 手动选"亮色"时
+   才能覆盖系统深色, 否则两套规则会打架 */
+:root[data-theme='dark'] {
+  --text: #9ca3af;
+  --text-h: #f3f4f6;
+  --bg: #16171d;
+  --border: #2e303a;
+  --code-bg: #1f2028;
+  --accent: #c084fc;
+  --accent-bg: rgba(192, 132, 252, 0.15);
+  --accent-border: rgba(192, 132, 252, 0.5);
+  --social-bg: rgba(47, 48, 58, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+  color-scheme: dark;
+}
+
+:root[data-theme='dark'] #social .button-icon {
+  filter: invert(1) brightness(2);
 }
 
 #root {
@@ -60,6 +67,20 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+
+  /* 手机屏幕宽度有限, 去掉两侧装饰性竖线, 把空间留给内容 */
+  @media (max-width: 768px) {
+    border-inline: none;
+  }
+}
+
+/* antd <App> 会额外包一层 div: 让它撑满 #root,
+   内部的布局才能用 flex-grow 铺满整屏高度 */
+#root > .ant-app {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
 }
 
 body {
@@ -81,6 +102,10 @@ h1 {
     font-size: 36px;
     margin: 20px 0;
   }
+  @media (max-width: 768px) {
+    font-size: 28px;
+    letter-spacing: -0.8px;
+  }
 }
 h2 {
   font-size: 24px;
@@ -89,6 +114,9 @@ h2 {
   margin: 0 0 8px;
   @media (max-width: 1024px) {
     font-size: 20px;
+  }
+  @media (max-width: 768px) {
+    font-size: 19px;
   }
 }
 p {

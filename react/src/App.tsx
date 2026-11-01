@@ -1,6 +1,8 @@
 import { Link, Navigate, Route, Routes } from 'react-router-dom'
 import Layout from './layouts/Layout'
 import { learnRoutes } from './routes'
+import KnowledgeBaseFormPage from './pages/knowledge/KnowledgeBaseFormPage'
+import KnowledgeBaseDetailPage from './pages/knowledge/KnowledgeBaseDetailPage'
 
 // ── 路由配置(React Router v6) ────────────────────────────────
 // BrowserRouter 已在 main.tsx 中包住 <App />, 这里只声明"URL → 页面"的映射:
@@ -34,6 +36,12 @@ function App() {
         {learnRoutes.map(({ path, Component }) => (
           <Route key={path} path={path} element={<Component />} />
         ))}
+
+        {/* 知识库 CRUD: 列表由路由表生成, 需要动态参数的页面单独声明;
+            v6 会按具体程度排序, /new 与 /:id 不会互相抢占 */}
+        <Route path="knowledge-bases/new" element={<KnowledgeBaseFormPage />} />
+        <Route path="knowledge-bases/:id/edit" element={<KnowledgeBaseFormPage />} />
+        <Route path="knowledge-bases/:id" element={<KnowledgeBaseDetailPage />} />
 
         {/* 通配符兜底: 以上都没匹配到就显示 404 */}
         <Route path="*" element={<NotFound />} />
